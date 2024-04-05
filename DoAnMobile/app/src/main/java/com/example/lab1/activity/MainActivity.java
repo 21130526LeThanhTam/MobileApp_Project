@@ -1,7 +1,6 @@
-package com.example.lab1;
+package com.example.lab1.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,15 +8,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
@@ -27,6 +24,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.lab1.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
-
             }
         });
     }
@@ -107,34 +104,36 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.miProfile) {
-            Toast.makeText(this, "Trang cá nhân", Toast.LENGTH_SHORT).show();
+            View view =findViewById(R.id.miProfile);
+            PopupMenu popupMenu = new PopupMenu(this, view);
+            popupMenu.inflate(R.menu.context_menu);
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    // Xử lý sự kiện khi một mục menu được chọn
+                    int itemId = menuItem.getItemId();
+                    if(id== R.id.edit_profile){
+                        Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
+                        return true;
+                    } else if (id== R.id.change_pass) {
+                        Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
+                        return true;
+                    } else if (id== R.id.logout) {
+                        Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            popupMenu.show(); // Hiển thị PopupMenu
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    private void showAccountMenu(View view){
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Xử lý khi người dùng chọn một mục trong PopupMenu
-                int id = item.getItemId();
-                if (id == R.id.edit_profile) {
-                    Toast.makeText(MainActivity.this, "Chỉnh sửa thông tin", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (id == R.id.change_pass) {
-                    Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (id == R.id.logout) {
-                    Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
-        // Inflate menu từ tệp XML vào PopupMenu
-        popupMenu.getMenuInflater().inflate(R.menu.account_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
 
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+////        super.onCreateContextMenu(menu, v, menuInfo);
+//        getMenuInflater().inflate(R.menu.context_menu,menu);
+//    }
 }

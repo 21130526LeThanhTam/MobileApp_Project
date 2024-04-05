@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Thức uống" />
+    <item android:title="Mì cay" />
+    <item android:title="Gà rán" />
+    <item android:title="Cơm trộn" />
+    <item android:title="Đồ ăn vặt" />
+</menu>
