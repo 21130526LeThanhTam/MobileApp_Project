@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
@@ -14,6 +14,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="#ffba00" />
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toobarmanhinhchinh"
                 android:background="#ffba00"
@@ -26,10 +30,22 @@
                     <ImageView
                         android:id="@+id/logo"
                         android:layout_width="70dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/logo"/>
+                    <EditText
+                        android:id="@+id/search_box"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/logo"
+                        android:drawableRight="@drawable/baseline_find_replace_24"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/edittext_rounded_bg"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="7dp"
+                        /> <!-- Hoặc sử dụng android:paddingRight="10dp" -->
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
             <ViewFlipper
@@ -37,12 +53,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
             </ViewFlipper>
-           <androidx.appcompat.widget.Toolbar
-               android:id="@+id/toolbarChonMon"
-               android:background="#ffffff"
-               android:layout_width="match_parent"
-               android:layout_height="?attr/actionBarSize">
-           </androidx.appcompat.widget.Toolbar>
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/RecyclerViewChonMon"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="#ffffff"-->
+<!--                android:orientation="horizontal"/>-->
+            <ListView
+                android:id="@+id/ListViewChonMon"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

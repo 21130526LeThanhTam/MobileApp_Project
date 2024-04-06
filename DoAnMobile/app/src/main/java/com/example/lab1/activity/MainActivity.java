@@ -16,15 +16,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
+import com.example.lab1.adapter.CategoryAdapter;
+import com.example.lab1.model.Category;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -33,25 +31,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ViewFlipper viewFlipper;
-    RecyclerView recyclerViewManHinhChinh;
-    NavigationView navigationView;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
+    CategoryAdapter categoryAdapter;
+    List<Category> listOfCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         Anhxa();
         ActionBar();
         ActionViewFlipper();
     }
+
     private void ActionViewFlipper(){
         List<String> mangquangcao=new ArrayList<>();
         mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-big-ky-nguyen-800-300.jpg");
@@ -70,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper.setInAnimation(slide_in);
         viewFlipper.setOutAnimation(slide_out);
     }
+
     private void ActionBar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,13 +76,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void Anhxa() {
         toolbar = findViewById(R.id.toobarmanhinhchinh);
         viewFlipper=findViewById(R.id.viewLipper);
-        recyclerViewManHinhChinh = findViewById(R.id.recycleview);
         listViewManHinhChinh=findViewById(R.id.listviewMain);
-        navigationView = findViewById(R.id.navigationview);
         drawerLayout=findViewById(R.id.drawerlayout);
+
+        // Khởi tạo listCategory
+        listOfCategory = new ArrayList<>();
+        listOfCategory.add(new Category(1, "Category 1", "image_url_1"));
+        listOfCategory.add(new Category(2, "Category 2", "image_url_1"));
+        listOfCategory.add(new Category(3, "Category 3", "image_url_1"));
+
+        // Khởi tạo adapter
+        categoryAdapter = new CategoryAdapter(listOfCategory, getApplicationContext());
+        listViewManHinhChinh.setAdapter(categoryAdapter);
     }
 
     @Override
@@ -130,10 +134,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-////        super.onCreateContextMenu(menu, v, menuInfo);
-//        getMenuInflater().inflate(R.menu.context_menu,menu);
-//    }
 }
