@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
 import com.example.lab1.model.Category;
@@ -38,7 +40,7 @@ public class CategoryAdapter extends BaseAdapter {
         return 0;
     }
 
-    public class ViewHolder {
+    public class ViewHolder  {
         TextView name_category;
         ImageView image_category;
     }

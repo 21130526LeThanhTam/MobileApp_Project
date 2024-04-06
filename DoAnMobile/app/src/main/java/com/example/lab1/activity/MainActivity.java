@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -18,6 +19,8 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     CategoryAdapter categoryAdapter;
     List<Category> listOfCategory;
+    RecyclerView recyclerViewChonMon;
+    RecyclerView recycleview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recycleview.setLayoutManager(layoutManager);
     }
 
     private void ActionViewFlipper(){
@@ -82,10 +89,12 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper=findViewById(R.id.viewLipper);
         listViewManHinhChinh=findViewById(R.id.listviewMain);
         drawerLayout=findViewById(R.id.drawerlayout);
+        recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
+        recycleview =findViewById(R.id.recycleview);
 
         // Khởi tạo listCategory
         listOfCategory = new ArrayList<>();
-        listOfCategory.add(new Category(1, "Category 1", "image_url_1"));
+        listOfCategory.add(new Category(R.drawable.logo, "Category 1", "image_url_1"));
         listOfCategory.add(new Category(2, "Category 2", "image_url_1"));
         listOfCategory.add(new Category(3, "Category 3", "image_url_1"));
 

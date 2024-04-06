@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
             <View
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="19dp"
                 android:background="#ffba00" />
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toobarmanhinhchinh"
@@ -53,17 +53,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
             </ViewFlipper>
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/RecyclerViewChonMon"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                android:background="#ffffff"-->
-<!--                android:orientation="horizontal"/>-->
-            <ListView
-                android:id="@+id/ListViewChonMon"
-                android:background="#ffffff"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewChonMon"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
