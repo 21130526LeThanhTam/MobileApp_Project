@@ -37,12 +37,14 @@ public class CateAdapter extends RecyclerView.Adapter<CateAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Category category= listCate.get(position);
         holder.imageView.setImageResource(category.getImage_category());
+        holder.textView.setText(category.getName_category());
     }
 
     @Override
     public int getItemCount() {
         return listCate.size();
     }
+    //for(int position=0;position);position<listCate.size();position++
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         private ImageView imageView;

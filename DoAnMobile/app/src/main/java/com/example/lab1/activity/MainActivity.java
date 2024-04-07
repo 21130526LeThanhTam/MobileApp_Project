@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -19,14 +18,14 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
-import com.example.lab1.adapter.CategoryAdapter;
+import com.example.lab1.adapter.CateAdapter;
 import com.example.lab1.model.Category;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
-    CategoryAdapter categoryAdapter;
+    CateAdapter cateAdapter;
     List<Category> listOfCategory;
     RecyclerView recyclerViewChonMon;
     RecyclerView recycleview;
@@ -94,13 +93,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Khởi tạo listCategory
         listOfCategory = new ArrayList<>();
-        listOfCategory.add(new Category(R.drawable.logo, "Category 1", "image_url_1"));
-        listOfCategory.add(new Category(2, "Category 2", "image_url_1"));
-        listOfCategory.add(new Category(3, "Category 3", "image_url_1"));
+        listOfCategory.add(new Category(1, "Thức uống", R.drawable.drink));
+        listOfCategory.add(new Category(2, "Mì cay", R.drawable.micay));
+        listOfCategory.add(new Category(3, "Gà rán", R.drawable.garan));
+        listOfCategory.add(new Category(4, "Cơm trộn", R.drawable.comtron));
+        listOfCategory.add(new Category(5, "Đồ ăn vặt", R.drawable.doanvat));
 
-        // Khởi tạo adapter
-        categoryAdapter = new CategoryAdapter(listOfCategory, getApplicationContext());
-        listViewManHinhChinh.setAdapter(categoryAdapter);
+
+        //khơỉ tạo adapter
+        cateAdapter=new CateAdapter(listOfCategory);
+        recyclerViewChonMon.setAdapter(cateAdapter);
+        recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
+
     }
 
     @Override
