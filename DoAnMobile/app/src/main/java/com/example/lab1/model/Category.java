@@ -37,4 +37,5 @@ public class Category {
         this.name_category = name_category;
         this.image_category = image_category;
     }
+
 }

@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/item_imageProduct"
+        android:src="@drawable/baseline_food_bank_24"
+        android:layout_gravity="center"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:contentDescription="item_image_product"/>
+    <TextView
+        android:id="@+id/item_tenProduct"
+        android:text="Tên món ăn"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/item_price"
+        android:text="20000đ"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

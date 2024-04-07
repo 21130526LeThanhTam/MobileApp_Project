@@ -25,7 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
 import com.example.lab1.adapter.CateAdapter;
+import com.example.lab1.adapter.ProductAdapter;
 import com.example.lab1.model.Category;
+import com.example.lab1.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
     CateAdapter cateAdapter;
+    ProductAdapter productAdapter;
     List<Category> listOfCategory;
+    List<Product> lisOfProduct;
     RecyclerView recyclerViewChonMon;
-    RecyclerView recycleview;
+    RecyclerView recycleViewchonPro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        recycleview.setLayoutManager(layoutManager);
+//        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+//        recycleview.setLayoutManager(layoutManager);
     }
 
     private void ActionViewFlipper(){
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh=findViewById(R.id.listviewMain);
         drawerLayout=findViewById(R.id.drawerlayout);
         recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
-        recycleview =findViewById(R.id.recycleview);
+//        recycleViewchonPro =findViewById(R.id.recycleview);
 
         // Khởi tạo listCategory
         listOfCategory = new ArrayList<>();
@@ -98,12 +102,25 @@ public class MainActivity extends AppCompatActivity {
         listOfCategory.add(new Category(3, "Gà rán", R.drawable.garan));
         listOfCategory.add(new Category(4, "Cơm trộn", R.drawable.comtron));
         listOfCategory.add(new Category(5, "Đồ ăn vặt", R.drawable.doanvat));
+        // khởi tạo listProduct
+        lisOfProduct = new ArrayList<>();
+        lisOfProduct.add(new Product(1,"xiên bẩn",10000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(2,"bún cá",25000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(3,"bánh canh",20000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(4,"cơm tấm",25000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(5,"mì cay",39000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(6,"bún riêu",25000,R.drawable.doanvat));
 
 
         //khơỉ tạo adapter
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
         recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
+        // khởi tạo adapter cho product
+        productAdapter=new ProductAdapter(lisOfProduct);
+        recycleViewchonPro.setAdapter(productAdapter);
+        recycleViewchonPro.setLayoutManager(new GridLayoutManager(this,2));
+
 
     }
 
