@@ -1,24 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ImageView
-        android:id="@+id/item_imageProduct"
-        android:src="@drawable/baseline_food_bank_24"
-        android:layout_gravity="center"
-        android:layout_width="60dp"
-        android:layout_height="20dp"
-        android:contentDescription="item_image_product"/>
-    <TextView
-        android:id="@+id/item_tenProduct"
-        android:text="Tên món ăn"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/item_price"
-        android:text="20000đ"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/carrdViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+<!--            <ImageView-->
+<!--                android:id="@+id/item_imageProduct"-->
+<!--                android:src="@drawable/baseline_food_bank_24"-->
+<!--                android:layout_gravity="top|right"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_margin="5dp"
+                    android:id="@+id/imageProduct"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+                <TextView
+                    android:textColor="#f20"
+                    android:id="@+id/textViewProductName"
+                    android:text="Tên sản phẩm"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="#3F51B5"
+                    android:id="@+id/textViewProductPrice"
+                    android:text="20000đ"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

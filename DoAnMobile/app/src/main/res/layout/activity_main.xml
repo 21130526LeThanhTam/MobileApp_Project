@@ -78,12 +78,10 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleview"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
+                    android:id="@+id/recycleMainView"
+                    android:layout_margin="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>

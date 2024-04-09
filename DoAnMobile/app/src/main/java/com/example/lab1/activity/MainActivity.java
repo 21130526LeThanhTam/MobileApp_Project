@@ -19,14 +19,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
 import com.example.lab1.adapter.CateAdapter;
+import com.example.lab1.adapter.MenuItemAdapter;
 import com.example.lab1.adapter.ProductAdapter;
 import com.example.lab1.model.Category;
+import com.example.lab1.model.MenuItemLView;
 import com.example.lab1.model.Product;
 
 import java.util.ArrayList;
@@ -37,12 +38,18 @@ public class MainActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
+    // =============================Adapter====================
     CateAdapter cateAdapter;
     ProductAdapter productAdapter;
+    MenuItemAdapter menuItemAdapter;
+    //==============================List========================
     List<Category> listOfCategory;
     List<Product> lisOfProduct;
+    List<MenuItemLView> listMenuMain;
     RecyclerView recyclerViewChonMon;
-    RecyclerView recycleViewchonPro;
+    RecyclerView recycleMainView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-//        recycleview.setLayoutManager(layoutManager);
+
     }
 
     private void ActionViewFlipper(){
@@ -93,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh=findViewById(R.id.listviewMain);
         drawerLayout=findViewById(R.id.drawerlayout);
         recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
-//        recycleViewchonPro =findViewById(R.id.recycleview);
+        recycleMainView =findViewById(R.id.recycleMainView);
+
+
 
         // Khởi tạo listCategory
         listOfCategory = new ArrayList<>();
@@ -110,16 +118,25 @@ public class MainActivity extends AppCompatActivity {
         lisOfProduct.add(new Product(4,"cơm tấm",25000,R.drawable.doanvat));
         lisOfProduct.add(new Product(5,"mì cay",39000,R.drawable.doanvat));
         lisOfProduct.add(new Product(6,"bún riêu",25000,R.drawable.doanvat));
-
+        // Khởi tạo menu
+        listMenuMain = new ArrayList<>();
+        listMenuMain.add(new MenuItemLView(1,"Trang chủ",R.mipmap.ic_launcher));
+        listMenuMain.add(new MenuItemLView(2,"Cửa hàng",R.mipmap.ic_launcher));
+        listMenuMain.add(new MenuItemLView(3,"Cài đặt",R.mipmap.ic_launcher));
+        listMenuMain.add(new MenuItemLView(4,"Giỏ hàng",R.mipmap.ic_launcher));
 
         //khơỉ tạo adapter
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
         recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
         // khởi tạo adapter cho product
-        productAdapter=new ProductAdapter(lisOfProduct);
-        recycleViewchonPro.setAdapter(productAdapter);
-        recycleViewchonPro.setLayoutManager(new GridLayoutManager(this,2));
+//        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
+//        recycleMainView.setAdapter(productAdapter);
+//        recycleMainView.setLayoutManager(new GridLayoutManager(this,2));
+        // Khởi tạo adapter cho menuItem
+        menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
+        listViewManHinhChinh.setAdapter(menuItemAdapter);
+
 
 
     }
@@ -144,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    // Xử lý sự kiện khi một mục menu được chọn
                     int itemId = menuItem.getItemId();
                     if(id== R.id.edit_profile){
                         Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
@@ -159,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             });
-            popupMenu.show(); // Hiển thị PopupMenu
+            popupMenu.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
