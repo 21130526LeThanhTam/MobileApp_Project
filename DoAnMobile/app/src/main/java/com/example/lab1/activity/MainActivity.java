@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -110,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
         listOfCategory.add(new Category(3, "Gà rán", R.drawable.garan));
         listOfCategory.add(new Category(4, "Cơm trộn", R.drawable.comtron));
         listOfCategory.add(new Category(5, "Đồ ăn vặt", R.drawable.doanvat));
+        listOfCategory.add(new Category(6, "Đồ ăn vặt", R.drawable.doanvat));
+        listOfCategory.add(new Category(7, "Đồ ăn vặt", R.drawable.doanvat));
+        listOfCategory.add(new Category(8, "Đồ ăn vặt", R.drawable.doanvat));
+        listOfCategory.add(new Category(9, "Đồ ăn vặt", R.drawable.doanvat));
+        listOfCategory.add(new Category(10, "Đồ ăn vặt", R.drawable.doanvat));
         // khởi tạo listProduct
         lisOfProduct = new ArrayList<>();
         lisOfProduct.add(new Product(1,"xiên bẩn",10000,R.drawable.doanvat));
@@ -128,7 +134,10 @@ public class MainActivity extends AppCompatActivity {
         //khơỉ tạo adapter
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
-        recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager =new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewChonMon.setLayoutManager(layoutManager);
+//        recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
         // khởi tạo adapter cho product
 //        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
 //        recycleMainView.setAdapter(productAdapter);
