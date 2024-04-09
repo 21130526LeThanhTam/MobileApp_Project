@@ -137,9 +137,8 @@ public class MainActivity extends AppCompatActivity {
         menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
-
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

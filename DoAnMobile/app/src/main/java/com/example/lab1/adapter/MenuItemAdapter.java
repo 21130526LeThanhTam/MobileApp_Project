@@ -49,16 +49,18 @@ public class MenuItemAdapter extends BaseAdapter {
         ViewHolder viewHolder=null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
+            //View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category,parent,false);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.menu_scrollbar, null);
+            convertView = inflater.inflate(R.layout.menu_scrollbar, parent,false);
             viewHolder.textViewMenuItem = convertView.findViewById(R.id.textViewMenuItem);
             viewHolder.imageMenuItem = convertView.findViewById(R.id.imageMenuItem);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.textViewMenuItem.setText(menuSroll.get(position).getName_menu());
-            Glide.with(context).load(menuSroll.get(position)).into(viewHolder.imageMenuItem);
+
         }
+        viewHolder.textViewMenuItem.setText(menuSroll.get(position).getName_menu());
+        Glide.with(context).load(menuSroll.get(position).getImage_menu()).into(viewHolder.imageMenuItem);
         return convertView;
     }
 }
