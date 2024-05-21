@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewChonMon;
     RecyclerView recycleMainView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
-
     }
 
     private void ActionViewFlipper(){
@@ -103,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         recycleMainView =findViewById(R.id.recycleMainView);
 
 
-
         // Khởi tạo listCategory
         listOfCategory = new ArrayList<>();
         listOfCategory.add(new Category(1, "Thức uống", R.drawable.drink));
@@ -118,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
         listOfCategory.add(new Category(10, "Đồ ăn vặt", R.drawable.doanvat));
         // khởi tạo listProduct
         lisOfProduct = new ArrayList<>();
-        lisOfProduct.add(new Product(1,"xiên bẩn",10000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(2,"bún cá",25000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(3,"bánh canh",20000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(4,"cơm tấm",25000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(5,"mì cay",39000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(6,"bún riêu",25000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(1,"xiên bẩn",R.drawable.doanvat,10000));
+        lisOfProduct.add(new Product(2,"bún cá",R.drawable.doanvat,25000));
+        lisOfProduct.add(new Product(3,"bánh canh",R.drawable.doanvat,20000));
+        lisOfProduct.add(new Product(4,"cơm tấm",R.drawable.doanvat,25000));
+        lisOfProduct.add(new Product(5,"mì cay",R.drawable.doanvat,39000));
+        lisOfProduct.add(new Product(6,"bún riêu",R.drawable.doanvat,25000));
         // Khởi tạo menu
         listMenuMain = new ArrayList<>();
         listMenuMain.add(new MenuItemLView(1,"Trang chủ",R.mipmap.ic_launcher));
@@ -131,18 +127,16 @@ public class MainActivity extends AppCompatActivity {
         listMenuMain.add(new MenuItemLView(3,"Cài đặt",R.mipmap.ic_launcher));
         listMenuMain.add(new MenuItemLView(4,"Giỏ hàng",R.mipmap.ic_launcher));
 
-        //khơỉ tạo adapter
+        //khơỉ tạo adapter cho category
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager =new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         recyclerViewChonMon.setLayoutManager(layoutManager);
-//        recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
         // khởi tạo adapter cho product
-//        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
-//        recycleMainView.setAdapter(productAdapter);
-//        recycleMainView.setLayoutManager(new GridLayoutManager(this,2));
-        // Khởi tạo adapter cho menuItem
+        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
+        recycleMainView.setHasFixedSize(true);
+        recycleMainView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recycleMainView.setAdapter(productAdapter);
         menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
