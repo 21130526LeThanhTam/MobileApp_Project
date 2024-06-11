@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".MainActivity">
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
@@ -53,16 +54,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
             </ViewFlipper>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#ffffff" />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewChonMon"
+                android:id="@+id/listViewCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal"/>
+                android:layout_height="wrap_content" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -94,7 +91,7 @@
             <ListView
                 android:id="@+id/listviewMain"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 
