@@ -7,14 +7,17 @@
     >
     <ImageView
         android:id="@+id/item_image"
-        android:src="@drawable/baseline_food_bank_24"
+        android:src="@drawable/ic_media_24"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="60dp"
-        android:layout_height="20dp"/>
+        android:layout_height="30dp"/>
+
     <TextView
-        android:id="@+id/item_tenCate"
-        android:text="Thức uống"
+        android:id="@+id/item_name"
+        android:text="Cá viên chiên"
         android:layout_gravity="center"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
