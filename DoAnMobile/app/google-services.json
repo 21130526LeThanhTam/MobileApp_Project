@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "429806336950",
+    "firebase_url": "https://mobiproject-48d6f-default-rtdb.firebaseio.com",
+    "project_id": "mobiproject-48d6f",
+    "storage_bucket": "mobiproject-48d6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429806336950:android:b489424e5074cec1415f17",
+        "android_client_info": {
+          "package_name": "com.example.lab1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDydyrLjrQ186kz97oCsl-IiIHlsGkS1T4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

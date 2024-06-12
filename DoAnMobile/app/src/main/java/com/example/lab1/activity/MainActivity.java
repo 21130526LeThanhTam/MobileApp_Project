@@ -1,5 +1,6 @@
 package com.example.lab1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,10 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
@@ -30,6 +33,14 @@ import com.example.lab1.adapter.ProductAdapter;
 import com.example.lab1.model.Category;
 import com.example.lab1.model.MenuItemLView;
 import com.example.lab1.model.Product;
+import com.example.lab1.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
     List<MenuItemLView> listMenuMain;
     RecyclerView recyclerViewChonMon;
     RecyclerView recycleMainView;
+    FirebaseUser firebaseUser;
+    FirebaseAuth auth;
+    //=====================================
+    ImageView avatar;
+    TextView name;
+    TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
+
     }
 
     private void ActionViewFlipper(){
@@ -98,6 +116,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerlayout);
         recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
         recycleMainView =findViewById(R.id.recycleMainView);
+        auth= FirebaseAuth.getInstance();
+        firebaseUser= auth.getCurrentUser();
+
+        avatar= findViewById(R.id.img_avatar);
+        name= findViewById(R.id.tv_name);
+        email= findViewById(R.id.tv_email);
+//        if(firebaseUser != null){
+//            name.setText(firebaseUser.ge);
+//        }
 
 
         // Khởi tạo listCategory
@@ -127,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         listMenuMain.add(new MenuItemLView(3,"Cài đặt",R.mipmap.ic_launcher));
         listMenuMain.add(new MenuItemLView(4,"Giỏ hàng",R.mipmap.ic_launcher));
 
+
         //khơỉ tạo adapter cho category
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
@@ -140,6 +168,28 @@ public class MainActivity extends AppCompatActivity {
         menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
+    }
+
+    private List<User>onClickReadData() {
+        List<User>userList= new ArrayList<>();
+        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference= firebaseDatabase.getReference();
+        databaseReference.child("User").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    User user= snap.getValue(User.class);
+                    userList.add(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return userList;
     }
 
 
@@ -164,14 +214,17 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     int itemId = menuItem.getItemId();
-                    if(id== R.id.edit_profile){
+                    if(itemId== R.id.edit_profile){
                         Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
                         return true;
-                    } else if (id== R.id.change_pass) {
+                    } else if (itemId== R.id.change_pass) {
                         Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
                         return true;
-                    } else if (id== R.id.logout) {
+                    } else if (itemId== R.id.logout) {
                         Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
+                        auth.signOut();
+                        Intent intent= new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
                         return true;
                     }
                     return false;
