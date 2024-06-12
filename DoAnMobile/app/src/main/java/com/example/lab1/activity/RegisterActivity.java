@@ -122,13 +122,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "User register successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "User register successfully!!!!", Toast.LENGTH_LONG).show();
 //                                FirebaseUser firebaseUser = auth.getCurrentUser();
                                 String userID= auth.getUid();
                                 User a = new User(userID,str_username,str_email,str_mobile,0);
                                 mDatabase.child("User").push().setValue(a);
                             }else{
-                                Toast.makeText(RegisterActivity.this, "Email đã tồn tại", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Email đã tồn tại!!!!", Toast.LENGTH_LONG).show();
                                 //send verification email.
 //                                auth.sendEmailVerification();
                                 // chuyển sang trang chính.
