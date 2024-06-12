@@ -14,7 +14,7 @@
         android:layout_height="30dp"/>
 
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/item_tenCate"
         android:text="Cá viên chiên"
         android:layout_gravity="center"
         android:textSize="15dp"
