@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
+        getDataIntent();
 
     }
 
@@ -190,6 +191,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return userList;
+    }
+    public void getDataIntent(){
+String phonenum = getIntent().getStringExtra("phonenumber");
+
     }
 
 
