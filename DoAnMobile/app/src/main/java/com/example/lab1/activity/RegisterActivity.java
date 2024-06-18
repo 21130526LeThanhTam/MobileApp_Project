@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btndangnhap = findViewById(R.id.btn_quaylai);
         btndangky.setOnClickListener(this);
         btndangnhap.setOnClickListener(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
     private void register(){
         String str_email = email.getText().toString().trim();
@@ -62,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String str_mobile = mobile.getText().toString().trim();
         String str_username = username.getText().toString().trim();
 //        phone= new ArrayList<String>();
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 //        mDatabase.child("User").addChildEventListener(new ChildEventListener() {
 //            @Override
 //            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -122,13 +123,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "User register successfully!!!!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "đăng ký thành công", Toast.LENGTH_LONG).show();
 //                                FirebaseUser firebaseUser = auth.getCurrentUser();
                                 String userID= auth.getUid();
                                 User a = new User(userID,str_username,str_email,str_mobile,0);
                                 mDatabase.child("User").push().setValue(a);
                             }else{
-                                Toast.makeText(RegisterActivity.this, "Email đã tồn tại!!!!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "email này đã tồn tại", Toast.LENGTH_LONG).show();
                                 //send verification email.
 //                                auth.sendEmailVerification();
                                 // chuyển sang trang chính.

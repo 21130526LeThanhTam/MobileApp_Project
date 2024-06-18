@@ -40,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView avatar;
     TextView name;
     TextView email;
+    //khai báo realtimeDatabase
+    FirebaseDatabase mDatabase ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void ActionViewFlipper(){
         List<String> mangquangcao=new ArrayList<>();
-        mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-big-ky-nguyen-800-300.jpg");
+        mangquangcao.add("https://sasin.vn:8002//Resource/Image/Promotion/PM00029/Image/PM00029.webp");
         mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-HC-Tra-Gop-800-300.png");
         mangquangcao.add("https://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-Le-hoi-phu-kien-800-300.png");
         for(int i = 0;i<mangquangcao.size();i++){
@@ -110,21 +113,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Anhxa() {
+        auth= FirebaseAuth.getInstance();
+        firebaseUser= auth.getCurrentUser();
+        //===============================================
         toolbar = findViewById(R.id.toobarmanhinhchinh);
         viewFlipper=findViewById(R.id.viewLipper);
         listViewManHinhChinh=findViewById(R.id.listviewMain);
         drawerLayout=findViewById(R.id.drawerlayout);
         recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
         recycleMainView =findViewById(R.id.recycleMainView);
-        auth= FirebaseAuth.getInstance();
-        firebaseUser= auth.getCurrentUser();
+
 
         avatar= findViewById(R.id.img_avatar);
         name= findViewById(R.id.tv_name);
         email= findViewById(R.id.tv_email);
-//        if(firebaseUser != null){
-//            name.setText(firebaseUser.ge);
-//        }
+        mDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference myRef= mDatabase.getReference("User");
+        if(auth !=null){
+            Query query= myRef.orderByChild("id").equalTo(firebaseUser.getUid());
+            email.setText(firebaseUser.getEmail());
+            name.setText(firebaseUser.getDisplayName());
+//            query.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for(DataSnapshot userSnapshot :snapshot.getChildren()){
+//                        User user = userSnapshot.getValue(User.class);
+//                        if (user != null) {
+//                            name.setText(user.getName());
+//                            email.setText(user.getEmail());
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+        }
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, ThongTinCaNhanActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // Khởi tạo listCategory
@@ -170,27 +203,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<User>onClickReadData() {
-        List<User>userList= new ArrayList<>();
-        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference= firebaseDatabase.getReference();
-        databaseReference.child("User").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    User user= snap.getValue(User.class);
-                    userList.add(user);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return userList;
-    }
 
 
     @Override
