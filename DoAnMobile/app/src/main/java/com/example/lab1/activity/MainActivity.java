@@ -1,6 +1,7 @@
 package com.example.lab1.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         getDataIntent();
-
+//showUserInformation();
     }
 
     private void ActionViewFlipper(){
@@ -169,6 +170,27 @@ public class MainActivity extends AppCompatActivity {
         menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
+    }
+    private void showUserInformation(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+
+        }
+        // Name, email address, and profile photo Url
+        String namee = user.getDisplayName();
+        String emaill = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+if (namee==null){
+    name.setVisibility(View.GONE);
+}
+else {
+    name.setVisibility(View.VISIBLE);
+    name.setText(namee);
+}
+
+        email.setText(emaill);
+        Glide.with(this).load(photoUrl).error(R.drawable.user).into(avatar);
     }
 
     private List<User>onClickReadData() {
