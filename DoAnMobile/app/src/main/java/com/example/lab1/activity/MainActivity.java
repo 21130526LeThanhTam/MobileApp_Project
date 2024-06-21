@@ -1,8 +1,11 @@
 package com.example.lab1.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,12 +19,18 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,10 +52,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int MY_REQUEST_CODE=10;
+    final public ProfileFragment profileFragment= new ProfileFragment();
+   final public ActivityResultLauncher<Intent> mActivityResultLaucher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if ( result.getResultCode()== RESULT_OK) {
+Intent intent = result.getData();
+                if (intent == null) {
+                    return;
+
+                }
+                Uri uri = intent.getData();
+                profileFragment.setUri(uri);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                    profileFragment.setBitMapImageView(bitmap);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    });
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     ListView listViewManHinhChinh;
@@ -76,8 +108,27 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         ActionBar();
         ActionViewFlipper();
-        getDataIntent();
-//showUserInformation();
+//        getDataIntent();
+showUserInformation();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_REQUEST_CODE){
+            if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                openGallery();
+            }
+
+        }
+    }
+
+    public void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        mActivityResultLaucher.launch(Intent.createChooser(intent,"chọn ảnh"));
     }
 
     private void ActionViewFlipper(){
@@ -171,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
     }
-    private void showUserInformation(){
+    public void showUserInformation(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             return;
@@ -214,10 +265,10 @@ else {
         });
         return userList;
     }
-    public void getDataIntent(){
-String phonenum = getIntent().getStringExtra("phonenumber");
-
-    }
+//    public void getDataIntent(){
+//String phonenum = getIntent().getStringExtra("phonenumber");
+//
+//    }
 
 
     @Override
@@ -243,6 +294,9 @@ String phonenum = getIntent().getStringExtra("phonenumber");
                     int itemId = menuItem.getItemId();
                     if(itemId== R.id.edit_profile){
                         Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
+
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main, profileFragment).commit();
                         return true;
                     } else if (itemId== R.id.change_pass) {
                         Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
@@ -262,4 +316,6 @@ String phonenum = getIntent().getStringExtra("phonenumber");
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

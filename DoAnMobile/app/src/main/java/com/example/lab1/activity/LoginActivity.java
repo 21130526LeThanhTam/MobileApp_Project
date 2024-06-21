@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_LONG).show();
                                 Intent intent= new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
+
                             } else {
                                 Toast.makeText(LoginActivity.this, "User register unsuccessfully", Toast.LENGTH_LONG).show();
                             }
