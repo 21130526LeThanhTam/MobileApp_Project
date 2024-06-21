@@ -4,6 +4,7 @@ package com.example.lab1.activity;
 import static com.example.lab1.activity.MainActivity.MY_REQUEST_CODE;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -33,6 +34,7 @@ private View mView;
 private ImageView imgAvatar;
 private EditText editFullName,editsdt;
 private Button btnUpdateProfile;
+    private Button btnBack;
 Uri mUri;
 MainActivity mMainActivity;
     @Override
@@ -59,8 +61,33 @@ initListener();
             @Override
             public void onClick(View v) {
                 onClickUpdateProfile();
+                onClickUpdateEmail();
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void onClickUpdateEmail() {
+        String newemail= editsdt.getText().toString().trim();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.updateEmail(newemail)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "User email address updated.",Toast.LENGTH_SHORT).show();
+                           mMainActivity.showUserInformation();
+                        }
+                    }
+                });
     }
 
     private void onClickUpdateProfile() {
@@ -126,6 +153,7 @@ initListener();
     editFullName= mView.findViewById(R.id.editTextName);
     editsdt= mView.findViewById(R.id.editTextPhone);
     btnUpdateProfile= mView.findViewById(R.id.buttonUpdate);
+    btnBack = mView.findViewById(R.id.buttonBack);
 
 
 }

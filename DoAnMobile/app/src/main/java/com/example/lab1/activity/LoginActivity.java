@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     ImageView logo;
-
+TextView otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtresetpass.setOnClickListener(this);
         logo= findViewById(R.id.img_logo);
         logo.setOnClickListener(this);
+        otp=findViewById(R.id.textotp);
+        otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, VerifyPhone.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
