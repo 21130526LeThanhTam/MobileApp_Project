@@ -1,6 +1,11 @@
 package com.example.lab1.activity;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,15 +14,23 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,11 +43,42 @@ import com.example.lab1.adapter.ProductAdapter;
 import com.example.lab1.model.Category;
 import com.example.lab1.model.MenuItemLView;
 import com.example.lab1.model.Product;
+import com.example.lab1.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int MY_REQUEST_CODE=10;
+    final public ProfileFragment profileFragment= new ProfileFragment();
+   final public ActivityResultLauncher<Intent> mActivityResultLaucher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if ( result.getResultCode()== RESULT_OK) {
+Intent intent = result.getData();
+                if (intent == null) {
+                    return;
+
+                }
+                Uri uri = intent.getData();
+                profileFragment.setUri(uri);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                    profileFragment.setBitMapImageView(bitmap);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    });
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     ListView listViewManHinhChinh;
@@ -49,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
     List<MenuItemLView> listMenuMain;
     RecyclerView recyclerViewChonMon;
     RecyclerView recycleMainView;
-
+    FirebaseUser firebaseUser;
+    FirebaseAuth auth;
+    //=====================================
+    ImageView avatar;
+    TextView name;
+    TextView email;
 
 
     @Override
@@ -57,10 +106,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
         Anhxa();
+
         ActionBar();
         ActionViewFlipper();
 
+showUserInformation();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_REQUEST_CODE){
+            if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                openGallery();
+            }
+
+        }
+    }
+
+    public void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        mActivityResultLaucher.launch(Intent.createChooser(intent,"chọn ảnh"));
     }
 
     private void ActionViewFlipper(){
@@ -101,7 +172,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerlayout);
         recyclerViewChonMon= findViewById(R.id.recyclerViewChonMon);
         recycleMainView =findViewById(R.id.recycleMainView);
+        auth= FirebaseAuth.getInstance();
+        firebaseUser= auth.getCurrentUser();
 
+        avatar= findViewById(R.id.img_avatar);
+        name= findViewById(R.id.tv_name);
+        email= findViewById(R.id.tv_email);
+//        if(firebaseUser != null){
+//            name.setText(firebaseUser.ge);
+//        }
 
 
         // Khởi tạo listCategory
@@ -118,12 +197,12 @@ public class MainActivity extends AppCompatActivity {
         listOfCategory.add(new Category(10, "Đồ ăn vặt", R.drawable.doanvat));
         // khởi tạo listProduct
         lisOfProduct = new ArrayList<>();
-        lisOfProduct.add(new Product(1,"xiên bẩn",10000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(2,"bún cá",25000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(3,"bánh canh",20000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(4,"cơm tấm",25000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(5,"mì cay",39000,R.drawable.doanvat));
-        lisOfProduct.add(new Product(6,"bún riêu",25000,R.drawable.doanvat));
+        lisOfProduct.add(new Product(1,"xiên bẩn",R.drawable.doanvat,10000));
+        lisOfProduct.add(new Product(2,"bún cá",R.drawable.doanvat,25000));
+        lisOfProduct.add(new Product(3,"bánh canh",R.drawable.doanvat,20000));
+        lisOfProduct.add(new Product(4,"cơm tấm",R.drawable.doanvat,25000));
+        lisOfProduct.add(new Product(5,"mì cay",R.drawable.doanvat,39000));
+        lisOfProduct.add(new Product(6,"bún riêu",R.drawable.doanvat,25000));
         // Khởi tạo menu
         listMenuMain = new ArrayList<>();
         listMenuMain.add(new MenuItemLView(1,"Trang chủ",R.mipmap.ic_launcher));
@@ -131,22 +210,68 @@ public class MainActivity extends AppCompatActivity {
         listMenuMain.add(new MenuItemLView(3,"Cài đặt",R.mipmap.ic_launcher));
         listMenuMain.add(new MenuItemLView(4,"Giỏ hàng",R.mipmap.ic_launcher));
 
-        //khơỉ tạo adapter
+
+        //khơỉ tạo adapter cho category
         cateAdapter=new CateAdapter(listOfCategory);
         recyclerViewChonMon.setAdapter(cateAdapter);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager =new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         recyclerViewChonMon.setLayoutManager(layoutManager);
-//        recyclerViewChonMon.setLayoutManager(new GridLayoutManager(this,listOfCategory.size()));
         // khởi tạo adapter cho product
-//        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
-//        recycleMainView.setAdapter(productAdapter);
-//        recycleMainView.setLayoutManager(new GridLayoutManager(this,2));
-        // Khởi tạo adapter cho menuItem
+        productAdapter=new ProductAdapter(getApplicationContext(),lisOfProduct);
+        recycleMainView.setHasFixedSize(true);
+        recycleMainView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recycleMainView.setAdapter(productAdapter);
         menuItemAdapter = new MenuItemAdapter(getApplicationContext(),listMenuMain);
         listViewManHinhChinh.setAdapter(menuItemAdapter);
 
     }
+    public void showUserInformation(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+
+        }
+        // Name, email address, and profile photo Url
+        String namee = user.getDisplayName();
+        String emaill = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+if (namee==null){
+    name.setVisibility(View.GONE);
+}
+else {
+    name.setVisibility(View.VISIBLE);
+    name.setText(namee);
+}
+
+        email.setText(emaill);
+        Glide.with(this).load(photoUrl).error(R.drawable.user).into(avatar);
+    }
+
+    private List<User>onClickReadData() {
+        List<User>userList= new ArrayList<>();
+        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference= firebaseDatabase.getReference();
+        databaseReference.child("User").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    User user= snap.getValue(User.class);
+                    userList.add(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return userList;
+    }
+//    public void getDataIntent(){
+//String phonenum = getIntent().getStringExtra("phonenumber");
+//
+//    }
 
 
     @Override
@@ -170,14 +295,20 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     int itemId = menuItem.getItemId();
-                    if(id== R.id.edit_profile){
+                    if(itemId== R.id.edit_profile){
                         Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
+
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main, profileFragment).commit();
                         return true;
-                    } else if (id== R.id.change_pass) {
+                    } else if (itemId== R.id.change_pass) {
                         Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
                         return true;
-                    } else if (id== R.id.logout) {
+                    } else if (itemId== R.id.logout) {
                         Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
+                        auth.signOut();
+                        Intent intent= new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
                         return true;
                     }
                     return false;
@@ -188,4 +319,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

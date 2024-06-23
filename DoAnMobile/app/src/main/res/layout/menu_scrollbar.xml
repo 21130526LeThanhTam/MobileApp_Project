@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="180dp"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="20dp"-->
+<!--    android:gravity="bottom"-->
+<!--    android:background="@drawable/background_buttton">-->
+<!--    <ImageView-->
+<!--        android:id="@+id/img_avatar"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:paddingRight="15dp"
     android:orientation="horizontal">
     <LinearLayout
         android:layout_weight="4"
@@ -19,7 +33,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="6">
-
         <TextView
             android:id="@+id/textViewMenuItem"
             android:layout_width="wrap_content"
@@ -31,3 +44,81 @@
             android:textSize="25sp" />
     </LinearLayout>
 </LinearLayout>
+
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
+
+<!--    &lt;!&ndash; Phần tử con thứ nhất &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="180dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="20dp"-->
+<!--        android:gravity="bottom"-->
+<!--        android:background="@drawable/background_buttton">-->
+<!--        &lt;!&ndash; Nội dung bên trong &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:id="@+id/img_avatar"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:src="@mipmap/ic_launcher"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/tv_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Le Thanh Tam"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:textColor="@color/white" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/tv_email"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="abc@gmail.com"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textColor="@color/white" />-->
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; LinearLayout chứa TextViewMenuItem nằm ngang hàng với trọng tâm &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical">-->
+
+<!--        &lt;!&ndash; LinearLayout thứ hai &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_weight="4"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageView-->
+<!--                android:src="@mipmap/ic_launcher"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:id="@+id/imageMenuItem"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="70dp"/>-->
+<!--        </LinearLayout>-->
+
+<!--        &lt;!&ndash; LinearLayout chứa TextView &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="6"-->
+<!--            android:gravity="center_vertical">-->
+<!--            <TextView-->
+<!--                android:id="@+id/textViewMenuItem"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:text="Trang chủ"-->
+<!--                android:textColor="#f20"-->
+<!--                android:textSize="25sp" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+<!--</LinearLayout>-->
+
+
