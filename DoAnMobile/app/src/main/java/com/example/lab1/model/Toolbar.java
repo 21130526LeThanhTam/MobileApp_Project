@@ -1,9 +1,9 @@
 package com.example.lab1.model;
 
-public class Category {
+public class Toolbar  {
     int id;
-    String name;
     String image;
+    String function;
 
     public int getId() {
         return id;
@@ -13,19 +13,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
     }
 }
