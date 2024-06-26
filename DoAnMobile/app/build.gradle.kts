@@ -27,6 +27,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -37,8 +40,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
-    implementation(libs.firebase.firestore)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -54,4 +57,25 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
+
+    // gilder
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.google.android.material:material:1.5.0")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+    //RxJava
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("io.reactivex.rxjava3:rxjava:3.0.0")
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+    implementation ("com.google.firebase:firebase-firestore:24.0.0")
+    // Firebase Realtime Database
+    implementation ("com.google.firebase:firebase-database:20.0.0")
+
+
 }
