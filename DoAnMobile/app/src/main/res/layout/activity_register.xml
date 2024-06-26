@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.RegisterActivity">
+    tools:context="com.example.lab1.activity.RegisterActivity">
     <ImageView
     android:id="@+id/img_logo"
     app:layout_constraintTop_toTopOf="parent"
