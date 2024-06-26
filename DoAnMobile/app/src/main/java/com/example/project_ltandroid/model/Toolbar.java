@@ -1,6 +1,8 @@
 package com.example.project_ltandroid.model;
 
-public class Toolbar {
+import java.io.Serializable;
+
+public class Toolbar  {
     int id;
     String image;
     String function;

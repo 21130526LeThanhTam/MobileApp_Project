@@ -1,12 +1,14 @@
 package com.example.project_ltandroid.model;
 
-public class NewProduct {
+import java.io.Serializable;
+
+public class NewProduct implements Serializable {
     int id;
     String name;
     String image;
     String price;
     String description;
-    String category;
+    int category;
 
     public int getId() {
         return id;
@@ -48,11 +50,11 @@ public class NewProduct {
         this.description = description;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 }

@@ -11,20 +11,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project_ltandroid.Interface.CategoryClickListener;
 import com.example.project_ltandroid.R;
 import com.example.project_ltandroid.model.NewProduct;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
+// adapter này dùng để load các sản phẩm từ db ở trang chủ
 public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.MyViewHolder> {
     Context context;
     List<NewProduct> newProductList;
+    private CategoryClickListener listener;
 
 
-    public NewProductAdapter(Context context, List<NewProduct> newProductList) {
+    public NewProductAdapter(Context context, List<NewProduct> newProductList, CategoryClickListener listener) {
         this.context = context;
         this.newProductList = newProductList;
+        this.listener = listener;
+    }
+
+    // Phương thức này được thêm để cập nhật danh sách sản phẩm đã lọc
+    public void filterList(List<NewProduct> filteredList) {
+        newProductList = filteredList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,8 +52,15 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
         holder.nameProduct.setText(newProduct.getName());
         // định dạng số tiền
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.price.setText("Giá: " + decimalFormat.format(Double.parseDouble(newProduct.getPrice())) + "Đ");
+        holder.price.setText("Giá: " + decimalFormat.format(Double.parseDouble(newProduct.getPrice())) + "đ");
         Glide.with(context).load(newProduct.getImage()).into(holder.imageView);
+
+        // Set the click listener for the item
+        holder.itemView.setOnClickListener(v -> listener.onClick(v, position, false));
+        holder.itemView.setOnLongClickListener(v -> {
+            listener.onClick(v, position, true);
+            return true;
+        });
     }
 
     @Override
