@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.project_ltandroid"
+    namespace = "com.example.lab1"
     compileSdk = 34
 
     defaultConfig {
