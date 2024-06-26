@@ -30,32 +30,33 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class ProfileFragment extends Fragment {
-private View mView;
-private ImageView imgAvatar;
-private EditText editFullName,editsdt;
-private Button btnUpdateProfile;
+    private View mView;
+    private ImageView imgAvatar;
+    private EditText editFullName, editsdt;
+    private Button btnUpdateProfile;
     private Button btnBack;
-Uri mUri;
-MainActivity mMainActivity;
+    Uri mUri;
+    MainActivity mMainActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         mView =  inflater.inflate(R.layout.activity_edit_profile, container, false);
+        mView = inflater.inflate(R.layout.activity_edit_profile, container, false);
 
-initUI();
-mMainActivity = (MainActivity) getActivity();
-setUserInformation();
-initListener();
+        initUI();
+        mMainActivity = (MainActivity) getActivity();
+        setUserInformation();
+        initListener();
         return mView;
     }
 
     private void initListener() {
         imgAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestPermisson();
-            }
-        }
+                                         @Override
+                                         public void onClick(View v) {
+                                             onClickRequestPermisson();
+                                         }
+                                     }
         );
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ initListener();
     }
 
     private void onClickUpdateEmail() {
-        String newemail= editsdt.getText().toString().trim();
+        String newemail = editsdt.getText().toString().trim();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user.updateEmail(newemail)
@@ -83,8 +84,8 @@ initListener();
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getActivity(), "User email address updated.",Toast.LENGTH_SHORT).show();
-                           mMainActivity.showUserInformation();
+                            Toast.makeText(getActivity(), "User email address updated.", Toast.LENGTH_SHORT).show();
+                            mMainActivity.showUserInformation();
                         }
                     }
                 });
@@ -95,7 +96,7 @@ initListener();
         if (user == null) {
             return;
         }
-        String strFullName= editFullName.getText().toString().trim();
+        String strFullName = editFullName.getText().toString().trim();
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strFullName)
@@ -107,14 +108,14 @@ initListener();
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getActivity(),"update thành công",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "update thành công", Toast.LENGTH_SHORT).show();
                             mMainActivity.showUserInformation();
                         }
                     }
                 });
     }
 
-    public void setBitMapImageView(Bitmap bitmapImageView){
+    public void setBitMapImageView(Bitmap bitmapImageView) {
         imgAvatar.setImageBitmap(bitmapImageView);
 
     }
@@ -128,12 +129,11 @@ initListener();
             mMainActivity.openGallery();
             return;
         }
-        if ( getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED) {
+        if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             mMainActivity.openGallery();
-        }
-        else{
-            String [] permissions= {Manifest.permission.READ_EXTERNAL_STORAGE};
-            getActivity().requestPermissions(permissions,MY_REQUEST_CODE);
+        } else {
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            getActivity().requestPermissions(permissions, MY_REQUEST_CODE);
         }
     }
 
@@ -148,15 +148,15 @@ initListener();
         Glide.with(getActivity()).load(user.getPhotoUrl()).error(R.drawable.user).into(imgAvatar);
     }
 
-    public void initUI(){
-        imgAvatar= mView.findViewById(R.id.img_avatar);
-    editFullName= mView.findViewById(R.id.editTextName);
-    editsdt= mView.findViewById(R.id.editTextPhone);
-    btnUpdateProfile= mView.findViewById(R.id.buttonUpdate);
-    btnBack = mView.findViewById(R.id.buttonBack);
+    public void initUI() {
+        imgAvatar = mView.findViewById(R.id.img_avatar);
+        editFullName = mView.findViewById(R.id.editTextName);
+        editsdt = mView.findViewById(R.id.editTextPhone);
+        btnUpdateProfile = mView.findViewById(R.id.buttonUpdate);
+        btnBack = mView.findViewById(R.id.buttonBack);
 
 
-}
+    }
 
     public void setUri(Uri mUri) {
         this.mUri = mUri;
