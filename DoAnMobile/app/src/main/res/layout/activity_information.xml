@@ -17,17 +17,23 @@
             android:layout_height="match_parent"
             android:layout_gravity="end">
             <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_back" />
+            <ImageView
                 android:id="@+id/logo"
                 android:layout_width="70dp"
                 android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
                 android:src="@drawable/logo"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thông tin"
-                android:textSize="50dp"
+                android:textSize="40dp"
                 android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:textColor="#ffffff"

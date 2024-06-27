@@ -1,7 +1,11 @@
 package com.example.lab1.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,13 +31,24 @@ public class InformationActivity extends AppCompatActivity {
 RecyclerView recyclerView;
 InformationAdapter informationAdapter;
 List<Information> informationList;
+ImageView btn_back;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_information);
         recyclerView=findViewById(R.id.information_content);
+        btn_back=findViewById(R.id.imageView2);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InformationActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         informationAdapter=new InformationAdapter(getInformation(),this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(gridLayoutManager);
