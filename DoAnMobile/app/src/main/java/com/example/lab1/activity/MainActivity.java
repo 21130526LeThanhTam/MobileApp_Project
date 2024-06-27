@@ -100,10 +100,13 @@ public class MainActivity extends AppCompatActivity {
     ListView listViewManHinhChinh;
     RecyclerView recyclerViewCategory;
 
+
     ToolbarAdapter toolbarAdapter;
     List<com.example.lab1.model.Toolbar> listToolbar;
 
     NavigationView navigationView;
+
+
     DrawerLayout drawerLayout;
     CategoryAdapter categoryAdapter;
     List<Category> listCategory;
