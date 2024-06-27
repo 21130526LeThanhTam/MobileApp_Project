@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
     SearchAdapter searchAdapter;
     List<NewProduct> allProducts; // Danh sách tất cả sản phẩm
     List<NewProduct> filteredProducts = new ArrayList<>(); // Danh sách sản phẩm đã lọc
+    ImageView cartIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Xử lý tìm kiếm
 
+        // Thiết lập OnClickListener cho icon giỏ hàng
 
     }
     @Override
@@ -585,6 +587,11 @@ private void getCategory() {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.miCart) {
+            // Khởi tạo Intent để chuyển sang CartActivity
+            Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+            startActivity(intent);
+
+            // Hiển thị Toast thông báo
             Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.miProfile) {

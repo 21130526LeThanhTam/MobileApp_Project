@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.OrderHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true" />
         <activity
@@ -35,19 +38,23 @@
             android:name=".activity.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.lab1.activity.DetailActivity"
-            android:parentActivityName="com.example.lab1.activity.MainActivity" />
+            android:name=".activity.DetailActivity"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name="com.example.lab1.activity.ContactActivity"
+            android:name=".activity.CartActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.ContactActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.lab1.activity.CategoryActivity"
-            android:parentActivityName="com.example.lab1.activity.MainActivity" /> <!-- MainActivity phải là parent để CategoryActivity có thể back về -->
+            android:name=".activity.CategoryActivity"
+            android:parentActivityName=".activity.MainActivity" /> <!-- MainActivity phải là parent để CategoryActivity có thể back về -->
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
