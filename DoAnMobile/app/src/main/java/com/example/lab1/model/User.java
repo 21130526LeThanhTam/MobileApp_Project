@@ -8,13 +8,13 @@ public class User {
     private String phone;
     private int role;
 
-    private String cart_id;
+    private Cart cart_id;
 
-    public String getCart_id() {
+    public Cart getCart_id() {
         return cart_id;
     }
 
-    public void setCart_id(String cart_id) {
+    public void setCart_id(Cart cart_id) {
         this.cart_id = cart_id;
     }
 
@@ -66,17 +66,24 @@ public class User {
         this.phone = phone;
     }
 
-    public User() {
-        this.cart_id = this.id;
-    }
-
-    public User(String id, String name, String email, String phone, int role) {
+    public User(String id, String name, String email, String phone, int role, Cart cart_id) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.role = role;
-        this.cart_id = id;
+        this.cart_id = cart_id;
+    }
+    public User(){}
+
+    public User(String id, String name, String email, String password, String phone, int role, Cart cart_id) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.cart_id = cart_id;
     }
 
     @Override

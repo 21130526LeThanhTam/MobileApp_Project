@@ -72,12 +72,12 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static final int MY_REQUEST_CODE=10;
-    final public ProfileFragment profileFragment= new ProfileFragment();
-    final public ActivityResultLauncher<Intent> mActivityResultLaucher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    public static final int MY_REQUEST_CODE = 10;
+    final public ProfileFragment profileFragment = new ProfileFragment();
+    final public ActivityResultLauncher<Intent> mActivityResultLaucher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if ( result.getResultCode()== RESULT_OK) {
+            if (result.getResultCode() == RESULT_OK) {
                 Intent intent = result.getData();
                 if (intent == null) {
                     return;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Uri uri = intent.getData();
                 profileFragment.setUri(uri);
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                     profileFragment.setBitMapImageView(bitmap);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
     List<com.example.lab1.model.Toolbar> listToolbar;
 
     NavigationView navigationView;
-
 
     DrawerLayout drawerLayout;
     CategoryAdapter categoryAdapter;
@@ -158,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
         // Thiết lập OnClickListener cho icon giỏ hàng
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_REQUEST_CODE){
-            if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+        if (requestCode == MY_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
             }
 
@@ -173,9 +173,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        mActivityResultLaucher.launch(Intent.createChooser(intent,"chọn ảnh"));
+        mActivityResultLaucher.launch(Intent.createChooser(intent, "chọn ảnh"));
     }
-    public void showUserInformation(){
+
+    public void showUserInformation() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             return;
@@ -185,10 +186,9 @@ public class MainActivity extends AppCompatActivity {
         String namee = user.getDisplayName();
         String emaill = user.getEmail();
         Uri photoUrl = user.getPhotoUrl();
-        if (namee==null){
+        if (namee == null) {
             name.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             name.setVisibility(View.VISIBLE);
             name.setText(namee);
         }
@@ -316,152 +316,74 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void getNewProduct() {
-//        compositeDisposable.add(apiBanHang.getNewProduct()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        newProductModel -> {
-//                            if (newProductModel.isSuccess()) {
-//                                allProducts = newProductModel.getResult();
-//                                // khởi tạo adapter
-//                                newProductAdapter = new NewProductAdapter(getApplicationContext(), allProducts, new CategoryClickListener() {
-//                                    @Override
-//                                    public void onClick(View view, int pos, boolean isLongClick) {
-//                                        if (!isLongClick) {
-//                                            NewProduct newProduct = allProducts.get(pos);
-//                                            Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-//                                            intent.putExtra("chitiet", newProduct);
-//                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                            startActivity(intent);
-//                                        }
-//                                    }
-//                                });
-//                                recyclerViewManHinhChinh.setAdapter(newProductAdapter);
-//                            }
-//                        }, throwable -> {
-//                            Toast.makeText(getApplicationContext(), "Khong ket noi duoc voi server: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                        }
-//                )
-//        );
-//    }
+    private void getToolbar() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("toolbar");
 
-//    private void getToolbar() {
-//        compositeDisposable.add(apiBanHang.getToolbar()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        toolbarModel -> {
-//                            if (toolbarModel.isSuccess()) {
-//                                listToolbar = toolbarModel.getResult();
-//                                // khởi tạo adapter
-//                                toolbarAdapter = new ToolbarAdapter(getApplicationContext(), listToolbar);
-//                                listViewManHinhChinh.setAdapter(toolbarAdapter);
-//
-//
-//                            }
-//                        }
-//
-//                )
-//        );
-//    }
-private void getToolbar() {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("toolbar");
-
-    myRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            listToolbar = new ArrayList<>();
-            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                try {
-                    com.example.lab1.model.Toolbar toolbar = snapshot.getValue(com.example.lab1.model.Toolbar.class);
-                    listToolbar.add(toolbar);
-                } catch (DatabaseException e) {
-                    e.printStackTrace();
-                    // Handle error
-                }
-            }
-            // Khởi tạo adapter
-            toolbarAdapter = new ToolbarAdapter(getApplicationContext(), listToolbar);
-            listViewManHinhChinh.setAdapter(toolbarAdapter);
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(getApplicationContext(), "Không kết nối được với server: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    });
-}
-
-//    private void getCategory() {
-//        compositeDisposable.add(apiBanHang.getCategory()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        categoryModel -> {
-//                            if (categoryModel.isSuccess()) {
-//                                listCategory = categoryModel.getResult();
-//                                // khởi tạo adapter với CategoryClickListener
-//                                categoryAdapter = new CategoryAdapter(this, listCategory, new CategoryClickListener() {
-//                                    @Override
-//                                    public void onClick(View view, int pos, boolean isLongClick) {
-//                                        if (!isLongClick) {
-//                                            int categoryId = listCategory.get(pos).getId();
-//                                            Toast.makeText(getApplicationContext(), String.valueOf(categoryId), Toast.LENGTH_SHORT).show();
-//                                            Intent drinkIntent = new Intent(getApplicationContext(), CategoryActivity.class);
-//                                            drinkIntent.putExtra("category_id", categoryId);
-//                                            startActivity(drinkIntent);
-//                                        }
-//                                    }
-//                                });
-//                                recyclerViewCategory.setAdapter(categoryAdapter);
-//                            }
-//                        },
-//                        throwable -> {
-//                            Toast.makeText(getApplicationContext(), "Failed to load categories", Toast.LENGTH_SHORT).show();
-//                        }
-//                )
-//        );
-//    }
-private void getCategory() {
-    DatabaseReference categoryRef = FirebaseDatabase.getInstance().getReference().child("categories");
-
-   categoryRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            listCategory = new ArrayList<>();
-            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                try {
-                    Category category = snapshot.getValue(Category.class);
-                    listCategory.add(category);
-                } catch (DatabaseException e) {
-                    e.printStackTrace();
-                    // Handle error
-                }
-            }
-            // Khởi tạo adapter với CategoryClickListener
-            categoryAdapter = new CategoryAdapter(MainActivity.this, listCategory, new CategoryClickListener() {
-                @Override
-                public void onClick(View view, int pos, boolean isLongClick) {
-                    if (!isLongClick) {
-                        int categoryId = listCategory.get(pos).getId(); // Lấy id kiểu int
-                        Toast.makeText(getApplicationContext(), String.valueOf(categoryId), Toast.LENGTH_SHORT).show();
-                        Intent drinkIntent = new Intent(getApplicationContext(), CategoryActivity.class);
-                        drinkIntent.putExtra("category_id", categoryId);
-                        startActivity(drinkIntent);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listToolbar = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    try {
+                        com.example.lab1.model.Toolbar toolbar = snapshot.getValue(com.example.lab1.model.Toolbar.class);
+                        listToolbar.add(toolbar);
+                    } catch (DatabaseException e) {
+                        e.printStackTrace();
+                        // Handle error
                     }
                 }
-            });
-            recyclerViewCategory.setAdapter(categoryAdapter);
-        }
+                // Khởi tạo adapter
+                toolbarAdapter = new ToolbarAdapter(getApplicationContext(), listToolbar);
+                listViewManHinhChinh.setAdapter(toolbarAdapter);
+            }
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(getApplicationContext(), "Không kết nối được với server: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    });
-}
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Không kết nối được với server: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+    private void getCategory() {
+        DatabaseReference categoryRef = FirebaseDatabase.getInstance().getReference().child("categories");
+
+        categoryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listCategory = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    try {
+                        Category category = snapshot.getValue(Category.class);
+                        listCategory.add(category);
+                    } catch (DatabaseException e) {
+                        e.printStackTrace();
+                        // Handle error
+                    }
+                }
+                // Khởi tạo adapter với CategoryClickListener
+                categoryAdapter = new CategoryAdapter(MainActivity.this, listCategory, new CategoryClickListener() {
+                    @Override
+                    public void onClick(View view, int pos, boolean isLongClick) {
+                        if (!isLongClick) {
+                            int categoryId = listCategory.get(pos).getId(); // Lấy id kiểu int
+                            Toast.makeText(getApplicationContext(), String.valueOf(categoryId), Toast.LENGTH_SHORT).show();
+                            Intent drinkIntent = new Intent(getApplicationContext(), CategoryActivity.class);
+                            drinkIntent.putExtra("category_id", categoryId);
+                            startActivity(drinkIntent);
+                        }
+                    }
+                });
+                recyclerViewCategory.setAdapter(categoryAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Không kết nối được với server: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     // viewflipper chạy quảng cáo
     private void ActionViewFlipper() {
@@ -497,15 +419,15 @@ private void getCategory() {
 
     }
 
-    private List<User>onClickReadData() {
-        List<User>userList= new ArrayList<>();
-        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference= firebaseDatabase.getReference();
+    private List<User> onClickReadData() {
+        List<User> userList = new ArrayList<>();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.child("User").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    User user= snap.getValue(User.class);
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    User user = snap.getValue(User.class);
                     userList.add(user);
                 }
 
@@ -581,8 +503,8 @@ private void getCategory() {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -598,26 +520,26 @@ private void getCategory() {
             Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.miProfile) {
-            View view =findViewById(R.id.miProfile);
+            View view = findViewById(R.id.miProfile);
             PopupMenu popupMenu = new PopupMenu(this, view);
             popupMenu.inflate(R.menu.context_menu);
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     int itemId = menuItem.getItemId();
-                    if(itemId== R.id.edit_profile){
+                    if (itemId == R.id.edit_profile) {
                         Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
 
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main, profileFragment).commit();
                         return true;
-                    } else if (itemId== R.id.change_pass) {
+                    } else if (itemId == R.id.change_pass) {
                         Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
                         return true;
-                    } else if (itemId== R.id.logout) {
+                    } else if (itemId == R.id.logout) {
                         Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
                         auth.signOut();
-                        Intent intent= new Intent(MainActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         return true;
                     }

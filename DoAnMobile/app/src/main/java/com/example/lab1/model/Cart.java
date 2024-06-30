@@ -1,7 +1,6 @@
 package com.example.lab1.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Cart {
@@ -22,6 +21,7 @@ public class Cart {
         }
         return instance;
     }
+
 
     public void addToCart(CartItem item) {
         for (CartItem cartItem : cartItems) {
