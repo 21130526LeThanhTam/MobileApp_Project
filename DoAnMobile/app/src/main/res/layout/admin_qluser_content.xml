@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+   <TableRow
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/toolBarColor"
+       android:orientation="horizontal"
+
+       >
+
+      <TextView
+          android:id="@+id/nameUser"
+          android:layout_width="0dp"
+          android:gravity="center"
+
+          android:layout_height="wrap_content"
+          android:text="Tên"
+          android:layout_weight="1"
+          />
+      <View
+          android:layout_width="1dp"
+          android:layout_height="match_parent"
+          android:background="@color/red" />
+      <TextView
+          android:id="@+id/idEmail"
+          android:layout_width="0dp"
+          android:gravity="center"
+
+          android:layout_height="wrap_content"
+          android:text="email"
+          android:layout_weight="1"
+          />
+      <View
+          android:layout_width="1dp"
+          android:layout_height="match_parent"
+          android:background="@color/red" />
+      <TextView
+          android:id="@+id/sdtUser"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text="sdt"
+          android:gravity="center"
+          android:layout_weight="1"
+          />
+      <View
+          android:layout_width="1dp"
+          android:layout_height="match_parent"
+          android:background="@color/red" />
+     <androidx.appcompat.widget.SwitchCompat
+         android:gravity="center"
+         android:layout_width="50dp"
+         android:layout_height="wrap_content"
+         android:id="@+id/activeUser" />
+<!--         app:thumbTint="#0C4DDA"-->
+<!--         app:trackTint="@color/white"-->
+
+
+
+
+   </TableRow>
+
+
+</TableLayout>

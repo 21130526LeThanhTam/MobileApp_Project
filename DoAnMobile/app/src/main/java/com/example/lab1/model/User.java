@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String phone;
     private int role;
-
+    private boolean active;
     private Cart cart_id;
 
     public Cart getCart_id() {
@@ -66,35 +66,49 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String id, String name, String email, String phone, int role, Cart cart_id) {
+    public User(String id, String name, String email, String phone, int role, boolean active, Cart cart_id) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.role = role;
+        this.active = active;
         this.cart_id = cart_id;
     }
+
+
     public User(){}
 
-    public User(String id, String name, String email, String password, String phone, int role, Cart cart_id) {
+    public User(String id, String name, String email, String password, String phone, int role, boolean active, Cart cart_id) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.role = role;
+        this.active = active;
         this.cart_id = cart_id;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                "cart id='" + cart_id + '\'' +
                 ", role=" + role +
+                ", active=" + active +
+                ", cart_id=" + cart_id +
                 '}';
     }
 }

@@ -110,7 +110,6 @@ TextView otp;
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                                 //Toast.makeText(LoginActivity.this, "user.getUid()"+user.getUid(), Toast.LENGTH_LONG).show();
                                 if (user != null) {
@@ -118,20 +117,28 @@ TextView otp;
                                     databaseReference.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
-                                            if(snapshot.exists()){
+                                            if(snapshot.exists()) {
                                                 User user1 = snapshot.getValue(User.class);
-                                                Gson gson = new Gson();
-                                                String user_json=gson.toJson(user1);
-                                                SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
-                                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                editor.putString("user", user_json);
-                                                editor.apply();
-                                                if(user1.getRole()==1){
-                                                    Intent intent= new Intent(LoginActivity.this,MainActivity.class);
-                                                    startActivity(intent);
-                                                }else if(user1.getRole()==2){
-                                                    Intent intent= new Intent(LoginActivity.this,AdminActivity.class);
-                                                    startActivity(intent);
+                                                if (user1.isActive()== true) {
+                                                    Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
+                                                    Gson gson = new Gson();
+                                                    String user_json = gson.toJson(user1);
+                                                    SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putString("user", user_json);
+                                                    editor.apply();
+                                                    if (user1.getRole() == 1) {
+                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        startActivity(intent);
+                                                    } else if (user1.getRole() == 2) {
+                                                        Toast.makeText(LoginActivity.this, "Hi Admin", Toast.LENGTH_SHORT).show();
+
+                                                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                                        startActivity(intent);
+                                                    }
+
+                                                }else {
+                                                    Toast.makeText(LoginActivity.this, "Tài khoản đã bị khóa", Toast.LENGTH_SHORT).show();
                                                 }
 
                                             }

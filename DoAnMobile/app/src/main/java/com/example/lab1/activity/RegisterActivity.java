@@ -94,9 +94,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                                FirebaseUser firebaseUser = auth.getCurrentUser();
                                 String userID= auth.getUid();
                                 List<CartItem> ca=new ArrayList<>();
-                                User a = new User(userID,str_username,str_email,str_mobile,1,new Cart(ca));
+                                User a = new User(userID,str_username,str_email,str_mobile,1,true,new Cart(ca));
                                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("User").child(userID);
-                                mDatabase.setValue(a);
+                                mDatabase.setValue(a).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+                                        Toast.makeText(RegisterActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                                 Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                 // chuyển sang trang chính.
                                 Intent intent= new Intent(RegisterActivity.this,LoginActivity.class);

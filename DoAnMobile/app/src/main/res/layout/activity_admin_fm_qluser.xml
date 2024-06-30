@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="QUẢN LÍ USER"/>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:orientation="horizontal"
+            android:textAlignment="center"
+            >
+            <TextView
+                android:textColor="@color/white"
+             android:textSize="15dp"
+                android:gravity="center"
+                android:id="@+id/nameUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tên khách hàng"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/red" />
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="15dp"
+
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_weight="1"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/red" />
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại"
+                android:layout_weight="1"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/red" />
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="Hoạt động"
+
+                />
+
+
+
+        </TableRow>
+
+
+    </TableLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#80B678"
+        android:id="@+id/qluser_content"
+        />
+
+</LinearLayout>
