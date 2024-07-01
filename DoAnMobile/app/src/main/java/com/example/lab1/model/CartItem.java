@@ -20,6 +20,11 @@ public class CartItem implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public CartItem(String productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public String getProductId() {
         return productId;
     }

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.lab1.R;
 import com.example.lab1.model.Order;
 
-import java.util.Date;
 import java.util.List;
 
 public class OrderAdapter extends BaseAdapter {
@@ -52,7 +51,7 @@ public class OrderAdapter extends BaseAdapter {
         TextView recipientAddressTextView = convertView.findViewById(R.id.recipientAddress);
 
         orderDateTextView.setText(order.getOrderDate());
-        orderTotalTextView.setText(String.format("$%.2f", order.getTotalPrice()));
+        //orderTotalTextView.setText(String.format("$%.2f", order.getTotalPrice()));
         recipientNameTextView.setText(order.getRecipientName());
         recipientPhoneTextView.setText(order.getRecipientPhone());
         recipientAddressTextView.setText(order.getRecipientAddress());

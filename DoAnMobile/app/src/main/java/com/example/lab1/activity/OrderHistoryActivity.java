@@ -1,17 +1,11 @@
 package com.example.lab1.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.lab1.R;
 import com.example.lab1.adapter.OrderAdapter;
@@ -35,14 +29,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
         orderListView = findViewById(R.id.orderListView);
         loadOrderHistory();
         ImageView backButton = findViewById(R.id.imageView2);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OrderHistoryActivity.this, CartActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(OrderHistoryActivity.this, CartActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
     }
 
     private void loadOrderHistory() {

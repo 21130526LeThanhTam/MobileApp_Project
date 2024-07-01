@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/toolBarColor"
+        android:orientation="horizontal"
+
+        >
+
+        <TextView
+            android:id="@+id/stt"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="STT"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+        <TextView
+            android:id="@+id/tenKH"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="tenkh"
+            android:textColor="#2057E5"
+            android:layout_weight="1"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+        <ImageView
+            android:id="@+id/sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_shopping_cart_24"
+
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+        <TextView
+            android:id="@+id/ngaydat"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="#2057E5"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="ngaydat"
+
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="status"
+            android:gravity="center"
+
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+        <ImageView
+            android:id="@+id/remove"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_remove_circle_outline_24"
+            />
+        <ImageView
+            android:id="@+id/check"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_check_box_24"
+            />
+    </TableRow>
+
+
+</TableLayout>
