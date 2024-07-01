@@ -46,6 +46,7 @@ public class Cart {
         for (CartItem item : cartItems) {
             total += Double.parseDouble(item.getPrice()) * item.getQuantity();
         }
+
         return total;
     }
     public void clearCart() {

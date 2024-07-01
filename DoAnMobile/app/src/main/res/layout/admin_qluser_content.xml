@@ -52,7 +52,7 @@
           android:layout_width="1dp"
           android:layout_height="match_parent"
           android:background="@color/red" />
-     <androidx.appcompat.widget.SwitchCompat
+     <Switch
          android:gravity="center"
          android:layout_width="50dp"
          android:layout_height="wrap_content"

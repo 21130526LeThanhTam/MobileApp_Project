@@ -5,14 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab1.R;
 import com.example.lab1.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,16 +46,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.active.setChecked(user.isActive());
 
         final int p= position;
-        holder.active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User").child(user.getId());
-                databaseReference.child("active").setValue(isChecked);
-                user.setActive(isChecked);
-                notifyItemChanged(holder.getLayoutPosition());
-
-            }
-        });
+      holder.active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+          @Override
+          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              user.setActive(isChecked);
+              DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
+                      .child(user.getId());
+              databaseReference.child("active").setValue(isChecked)
+                      .addOnCompleteListener(new OnCompleteListener<Void>() {
+                          @Override
+                          public void onComplete(@NonNull Task<Void> task) {
+                              Toast.makeText(context, "Update success", Toast.LENGTH_SHORT).show();
+                          }
+                      });
+          }
+      });
     }
 
     @Override
@@ -65,7 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         TextView name,email,sdt;
-        SwitchCompat active;
+        Switch active;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
