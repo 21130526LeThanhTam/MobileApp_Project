@@ -63,7 +63,7 @@ public class admin_qluser_fm extends Fragment {
                     Toast.makeText(getContext(), "a"+user.isActive(), Toast.LENGTH_SHORT).show();
                     result.add(user);
                 }
-                userAdapter.notifyDataSetChanged();
+//                userAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
 
