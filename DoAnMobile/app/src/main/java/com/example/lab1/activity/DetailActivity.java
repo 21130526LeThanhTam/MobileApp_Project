@@ -1,12 +1,12 @@
 package com.example.lab1.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,13 +14,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import com.bumptech.glide.Glide;
-
+import com.example.lab1.R;
 import com.example.lab1.model.Cart;
 import com.example.lab1.model.CartItem;
 import com.example.lab1.model.NewProduct;
-import com.example.lab1.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
