@@ -198,11 +198,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-//                                if(!(user.isEmailVerified())){
-//                                    Log.d("verifyyyyy","tk chưa xác nhận");
-//                                    Toast.makeText(LoginActivity.this, "Tài khoản chưa được xác nhận", Toast.LENGTH_SHORT).show();
-//                                }else {
-//                                    Log.d("verifyyyyy","tk đã được xác nhận");
+                                if(!(user.isEmailVerified())){
+                                    Log.d("verifyyyyy","tk chưa xác nhận");
+                                    Toast.makeText(LoginActivity.this, "Tài khoản chưa được xác nhận", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Log.d("verifyyyyy","tk đã được xác nhận");
 
                                     Toast.makeText(LoginActivity.this, "user.getUid()" + user.getUid(), Toast.LENGTH_LONG).show();
                                     if (user != null) {
@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     } else {
                                         Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_LONG).show();
                                     }
-//                                }
+                                }
 
 
                             } else {
