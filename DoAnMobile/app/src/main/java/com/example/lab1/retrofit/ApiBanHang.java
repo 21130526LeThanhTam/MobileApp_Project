@@ -1,12 +1,10 @@
 package com.example.lab1.retrofit;
 
 
-
 import com.example.lab1.model.CategoryModel;
 import com.example.lab1.model.CategoryNameModel;
-import com.example.lab1.model.ToolbarModel;
 import com.example.lab1.model.NewProductModel;
-
+import com.example.lab1.model.ToolbarModel;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Field;

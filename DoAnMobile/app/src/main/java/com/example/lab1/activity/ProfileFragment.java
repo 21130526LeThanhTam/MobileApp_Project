@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -29,14 +28,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment {
     private View mView;
     private ImageView imgAvatar;
-    private EditText editFullName, editphone;
-    private TextView editsdt;
+    private EditText editFullName, editsdt;
     private Button btnUpdateProfile;
     private Button btnBack;
     Uri mUri;
@@ -66,8 +62,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onClickUpdateProfile();
-                onClickUpdatePhone();
-
+                onClickUpdateEmail();
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +75,21 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    private void onClickUpdateEmail() {
+        String newemail = editsdt.getText().toString().trim();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        user.updateEmail(newemail)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "User email address updated.", Toast.LENGTH_SHORT).show();
+                            mMainActivity.showUserInformation();
+                        }
+                    }
+                });
+    }
 
     private void onClickUpdateProfile() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,57 +103,16 @@ public class ProfileFragment extends Fragment {
                 .setPhotoUri(mUri)
                 .build();
 
-
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
-                                    .child(user.getUid());
-                            databaseReference.child("name").setValue(strFullName).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-                                    Toast.makeText(getActivity(), "update thành công", Toast.LENGTH_SHORT).show();
-                                    mMainActivity.showUserInformation();
-                                }
-                            });
-
+                            Toast.makeText(getActivity(), "update thành công", Toast.LENGTH_SHORT).show();
+                            mMainActivity.showUserInformation();
                         }
                     }
                 });
-    }
-
-    private void onClickUpdatePhone() {
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user == null) {
-//            return;
-//        }
-//        String strFullName = editphone.getText().toString().trim();
-//        user.updatePhoneNumber(PhoneAuthCredential.zza())
-//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                .setDisplayName(strFullName)
-//                .setPhotoUri(mUri)
-//                .build();
-//
-//        user.updateProfile(profileUpdates)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
-//                                    .child(user.getUid());
-//                            databaseReference.child("phone").setValue(editphone).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-//                                    Toast.makeText(getActivity(), "update thành công", Toast.LENGTH_SHORT).show();
-//                                    mMainActivity.showUserInformation();
-//                                }
-//                            });
-//
-//                        }
-//                    }
-//                });
     }
 
     public void setBitMapImageView(Bitmap bitmapImageView) {
@@ -177,7 +145,6 @@ public class ProfileFragment extends Fragment {
         }
         editFullName.setText(user.getDisplayName());
         editsdt.setText(user.getEmail());
-        editphone.setText(user.getPhoneNumber());
         Glide.with(getActivity()).load(user.getPhotoUrl()).error(R.drawable.user).into(imgAvatar);
     }
 
@@ -187,7 +154,6 @@ public class ProfileFragment extends Fragment {
         editsdt = mView.findViewById(R.id.editTextPhone);
         btnUpdateProfile = mView.findViewById(R.id.buttonUpdate);
         btnBack = mView.findViewById(R.id.buttonBack);
-        editphone=mView.findViewById(R.id.editphone);
 
 
     }

@@ -1,6 +1,5 @@
 package com.example.lab1.activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
-import com.example.lab1.model.Cart;
 import com.example.lab1.model.CartItem;
 import com.example.lab1.model.NewProduct;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,12 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
-import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     TextView tensp, giasp, mota;

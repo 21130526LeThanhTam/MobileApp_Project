@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.Interface.CategoryClickListener;
-import com.example.lab1.model.NewProduct;
 import com.example.lab1.R;
+import com.example.lab1.model.NewProduct;
 
 import java.text.DecimalFormat;
 import java.util.List;

@@ -125,7 +125,7 @@ TextView otp;
                                                     String user_json = gson.toJson(user1);
                                                     SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
                                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                    editor.putString("user", user_json);    
+                                                    editor.putString("user", user_json);
                                                     editor.apply();
                                                     if (user1.getRole() == 1) {
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

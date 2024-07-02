@@ -24,8 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -88,20 +86,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             email.requestFocus();
         } else if(str_pass.equals(str_repass)){
             auth= FirebaseAuth.getInstance();
-
             auth.createUserWithEmailAndPassword(str_email,str_pass).addOnCompleteListener(RegisterActivity.this,
                     new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                               FirebaseUser firebaseUser = auth.getCurrentUser();
-                               
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(str_username)
-
-                                        .build();
-
-                                firebaseUser.updateProfile(profileUpdates);
+//                                FirebaseUser firebaseUser = auth.getCurrentUser();
                                 String userID= auth.getUid();
                                 List<CartItem> ca=new ArrayList<>();
                                 User a = new User(userID,str_username,str_email,str_mobile,1,true,new Cart(ca));

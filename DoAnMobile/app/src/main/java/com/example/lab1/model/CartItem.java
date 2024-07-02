@@ -1,7 +1,5 @@
 package com.example.lab1.model;
 
-import java.io.Serializable;
-
 public class CartItem {
     private String cartItemId;
     private String productId;
@@ -69,15 +67,6 @@ public class CartItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return
-                "[ mã sp: " + productId +
-
-                ", số lượng: " + quantity +" ]"
-               ;
     }
 }
 

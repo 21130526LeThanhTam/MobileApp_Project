@@ -5,11 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab1.R;
@@ -44,18 +43,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.active.setChecked(user.isActive());
 
         final int p= position;
-      holder.active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-          @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-              user.setActive(isChecked);
-              DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
-                      .child(user.getId());
-              databaseReference.child("active").setValue(isChecked);
-              String a =(isChecked==true)?"Mở khóa tài khoản":"Khóa tài khoản";
-              Toast.makeText(context,a, Toast.LENGTH_SHORT).show();
-          }
-      });
+        holder.active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User").child(user.getId());
+                databaseReference.child("active").setValue(isChecked);
+                user.setActive(isChecked);
+                notifyItemChanged(holder.getLayoutPosition());
 
+            }
+        });
     }
 
     @Override
@@ -68,7 +65,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         TextView name,email,sdt;
-        Switch active;
+        SwitchCompat active;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);

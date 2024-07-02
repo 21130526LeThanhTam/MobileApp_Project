@@ -512,7 +512,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.miCart) {
-//             Khởi tạo Intent để chuyển sang CartActivity
+            // Khởi tạo Intent để chuyển sang CartActivity
             Intent intent = new Intent(getApplicationContext(), CartActivity.class);
             startActivity(intent);
 

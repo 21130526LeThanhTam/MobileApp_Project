@@ -1,25 +1,34 @@
 package com.example.lab1.activity;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lab1.R;
 import com.example.lab1.adapter.OrderAdapter;
 import com.example.lab1.model.Order;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderHistoryActivity extends AppCompatActivity {
+
     private ListView orderListView;
     private OrderAdapter orderAdapter;
+    private List<Order> orderList;
+    private DatabaseReference ordersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +36,39 @@ public class OrderHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_history);
 
         orderListView = findViewById(R.id.orderListView);
-        loadOrderHistory();
-        ImageView backButton = findViewById(R.id.imageView2);
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(OrderHistoryActivity.this, CartActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-    }
+        orderList = new ArrayList<>();
+        orderAdapter = new OrderAdapter(this, orderList);
+        orderListView.setAdapter(orderAdapter);
 
-    private void loadOrderHistory() {
-        SharedPreferences sharedPreferences = getSharedPreferences("OrderPrefs", MODE_PRIVATE);
-        String ordersJson = sharedPreferences.getString("orders", null);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            ordersRef = firebaseDatabase.getReference("Order");
 
-        List<Order> orders;
-        if (ordersJson != null) {
-            Type type = new TypeToken<List<Order>>() {}.getType();
-            orders = new Gson().fromJson(ordersJson, type);
-        } else {
-            orders = new ArrayList<>();
+            ordersRef.orderByChild("userId").equalTo(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    orderList.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Order order = snapshot.getValue(Order.class);
+                        orderList.add(order);
+                    }
+                    orderAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(OrderHistoryActivity.this, "Failed to load orders: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
-        orderAdapter = new OrderAdapter(this, orders);
-        orderListView.setAdapter(orderAdapter);
+        ImageView backButton = findViewById(R.id.imageView2);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(OrderHistoryActivity.this, CartActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }

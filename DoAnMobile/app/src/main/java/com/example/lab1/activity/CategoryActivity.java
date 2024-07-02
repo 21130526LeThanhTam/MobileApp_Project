@@ -13,13 +13,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lab1.R;
 import com.example.lab1.adapter.DrinkAdapter;
 import com.example.lab1.model.NewProduct;
 import com.example.lab1.retrofit.ApiBanHang;
 import com.example.lab1.retrofit.RetrofitClient;
 import com.example.lab1.utils.Utils;
-
-import com.example.lab1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

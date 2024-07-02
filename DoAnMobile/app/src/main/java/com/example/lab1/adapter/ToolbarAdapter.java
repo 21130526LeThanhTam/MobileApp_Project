@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import com.example.lab1.model.Toolbar;
 import com.example.lab1.R;
+import com.example.lab1.model.Toolbar;
 
 import java.util.List;
 

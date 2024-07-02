@@ -33,7 +33,7 @@ public class InformationAdapter extends RecyclerView.Adapter<InformationAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InformationAdapter.InformationViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InformationViewHolder holder, int position) {
         Information information=informationList.get(position);
         Glide.with(context).load(information.getAvt()).into(holder.avt);
         holder.mssv.setText(information.getMssv());

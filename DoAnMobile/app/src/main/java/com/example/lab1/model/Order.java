@@ -7,47 +7,50 @@ import java.util.Locale;
 
 public class Order {
     private List<CartItem> products;
+    private double totalPrice;
     private String orderDate;
     private String recipientName;
     private String recipientPhone;
     private String recipientAddress;
-    private String orderStatus;
     private String userId;
+    private String orderStatus;
 
-    public Order(List<CartItem> products, String orderDate, String recipientName, String recipientPhone, String recipientAddress, String oderStatus, String userId) {
+    public Order(List<CartItem> products, double totalPrice) {
         this.products = products;
-        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
+
+    public Order(List<CartItem> products, double totalPrice, String recipientName, String recipientPhone, String recipientAddress, String userId, String orderStatus) {
+        this.products = products;
+        this.totalPrice = totalPrice;
+        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         this.recipientName = recipientName;
         this.recipientPhone = recipientPhone;
         this.recipientAddress = recipientAddress;
-        this.orderStatus = oderStatus;
         this.userId = userId;
+        this.orderStatus = orderStatus;
     }
-
-    public Order(List<CartItem> products, String recipientName, String recipientPhone, String recipientAddress, String oderStatus, String userId) {
-        this.products = products;
-        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());;
-        this.recipientName = recipientName;
-        this.recipientPhone = recipientPhone;
-        this.recipientAddress = recipientAddress;
-        this.orderStatus = oderStatus;
-        this.userId = userId;
-    }
-
-    public Order() {
-    }
-
 
     public List<CartItem> getProducts() {
         return products;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
     }
 
     public void setProducts(List<CartItem> products) {
         this.products = products;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void setOrderDate(String orderDate) {
@@ -82,15 +85,7 @@ public class Order {
         return orderStatus;
     }
 
-    public void setOderStatus(String oderStatus) {
-        this.orderStatus = oderStatus;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
