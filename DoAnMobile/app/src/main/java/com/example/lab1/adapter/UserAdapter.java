@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab1.R;
 import com.example.lab1.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,15 +50,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
               user.setActive(isChecked);
               DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
                       .child(user.getId());
-              databaseReference.child("active").setValue(isChecked)
-                      .addOnCompleteListener(new OnCompleteListener<Void>() {
-                          @Override
-                          public void onComplete(@NonNull Task<Void> task) {
-                              Toast.makeText(context, "Update success", Toast.LENGTH_SHORT).show();
-                          }
-                      });
+              databaseReference.child("active").setValue(isChecked);
+              String a =(isChecked==true)?"Mở khóa tài khoản":"Khóa tài khoản";
+              Toast.makeText(context,a, Toast.LENGTH_SHORT).show();
           }
       });
+
     }
 
     @Override

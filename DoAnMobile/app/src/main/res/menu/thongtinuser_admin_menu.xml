@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/uid"
+    android:title="ID"
+    android:icon="@drawable/ic_key_24"
+    />
+    <item
+        android:id="@+id/email"
+        android:icon="@drawable/ic_email_24"
+        android:title="email"
+        />
+    <item
+        android:id="@+id/phone"
+        android:title="ID"
+        android:icon="@drawable/baseline_local_phone_24"
+        />
+
+</menu>

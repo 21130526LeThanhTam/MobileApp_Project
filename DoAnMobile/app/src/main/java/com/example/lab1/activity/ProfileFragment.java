@@ -94,6 +94,7 @@ public class ProfileFragment extends Fragment {
                 .setPhotoUri(mUri)
                 .build();
 
+
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

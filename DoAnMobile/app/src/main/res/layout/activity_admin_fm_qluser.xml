@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="sans-serif-black"
         android:text="QUẢN LÍ USER"/>
 
@@ -35,7 +36,9 @@
                 android:id="@+id/nameUser"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.7"
+                android:layout_gravity="center"
+
                 android:text="Tên khách hàng"
                 />
             <View
@@ -45,6 +48,7 @@
             <TextView
                 android:textColor="@color/white"
                 android:textSize="15dp"
+                android:layout_gravity="center"
 
                 android:gravity="center"
                 android:layout_width="0dp"
@@ -63,7 +67,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+
+                android:layout_weight="0.75"
                 />
             <View
                 android:layout_width="1dp"

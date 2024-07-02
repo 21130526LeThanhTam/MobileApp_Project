@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="sans-serif-black"
         android:text="QUẢN LÍ ĐƠN HÀNG"/>
 
@@ -34,6 +35,8 @@
                 android:gravity="center"
                 android:id="@+id/nameUser"
                 android:layout_width="0dp"
+                android:layout_gravity="center"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="STT"
@@ -49,6 +52,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Tên khách hàng"
+                android:layout_gravity="center"
+
                 android:layout_weight="1"
                 />
             <View
@@ -60,6 +65,8 @@
                 android:textSize="15dp"
                 android:gravity="center"
                 android:layout_width="0dp"
+                android:layout_gravity="center"
+
                 android:layout_height="wrap_content"
                 android:text="Đơn hàng"
                 android:layout_weight="1"
@@ -72,6 +79,8 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:gravity="center"
+                android:layout_gravity="center"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,6 +95,8 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:gravity="center"
+                android:layout_gravity="center"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,6 +112,8 @@
                 android:textSize="15dp"
                 android:gravity="center"
                 android:layout_width="0dp"
+                android:layout_gravity="center"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hành động"
@@ -118,6 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+
         android:visibility="gone" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
