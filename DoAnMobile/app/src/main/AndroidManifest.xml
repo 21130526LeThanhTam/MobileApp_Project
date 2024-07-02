@@ -76,9 +76,9 @@
         <activity
             android:name=".activity.DetailActivity"
             android:parentActivityName=".activity.MainActivity" />
-<!--        <activity-->
-<!--            android:name=".activity.CartActivity"-->
-<!--            android:parentActivityName=".activity.MainActivity" />-->
+        <activity
+            android:name=".activity.CartActivity"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.CategoryActivity"
             android:parentActivityName=".activity.MainActivity" /> <!-- MainActivity phải là parent để CategoryActivity có thể back về -->
