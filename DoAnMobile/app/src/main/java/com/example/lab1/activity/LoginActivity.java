@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
+        auth = FirebaseAuth.getInstance();
         txtdangki = findViewById(R.id.txtdangki);
         txtresetpass = findViewById(R.id.txtresetpass);
         email = findViewById(R.id.email);
@@ -123,7 +124,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Task<GoogleSignInAccount> task= GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account= task.getResult(ApiException.class);
-                firebaseAuth(account.getIdToken());
+                if (account != null) {
+                    Log.d("GoogleSignIn", "Google sign in successful, ID Token: " + account.getIdToken());
+                    firebaseAuth(account.getIdToken());
+                }else{
+                    Log.d("GoogleSignIn", "Google sign in FAilllsuccessful, ID Token: ");
+                }
 
             }
             catch (ApiException e)
@@ -131,6 +137,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this,"login failed:"+e,Toast.LENGTH_SHORT).show();
                 String errorMessage = "Google sign-in failed: " + e.getStatusCode() + " - " + e.getMessage();
                 Log.e("LoginFaile", "login failed:"+e, e);
+                Log.e("LoginFaile", errorMessage);
             }
         }
     }
