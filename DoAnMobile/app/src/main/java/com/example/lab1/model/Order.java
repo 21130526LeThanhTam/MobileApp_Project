@@ -1,52 +1,39 @@
 package com.example.lab1.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class Order {
-    private List<CartItem> items;
-    private double totalPrice;
+    private List<CartItem> products;
     private String orderDate;
     private String recipientName;
     private String recipientPhone;
     private String recipientAddress;
+    private String orderStatus;
+    private String userId;
 
-    public Order(List<CartItem> items, double totalPrice) {
-        this.items = items;
-        this.totalPrice = totalPrice;
-        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-    }
-
-
-    public Order(List<CartItem> items, double totalPrice, String recipientName, String recipientPhone, String recipientAddress) {
-        this.items = items;
-        this.totalPrice = totalPrice;
-        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    public Order(List<CartItem> products, String orderDate, String recipientName, String recipientPhone, String recipientAddress, String oderStatus, String userId) {
+        this.products = products;
+        this.orderDate = orderDate;
         this.recipientName = recipientName;
         this.recipientPhone = recipientPhone;
         this.recipientAddress = recipientAddress;
+        this.orderStatus = oderStatus;
+        this.userId = userId;
     }
 
-    public List<CartItem> getItems() {
-        return items;
+    public Order() {
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public List<CartItem> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<CartItem> products) {
+        this.products = products;
     }
 
     public String getOrderDate() {
         return orderDate;
-    }
-
-    public void setItems(List<CartItem> items) {
-        this.items = items;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public void setOrderDate(String orderDate) {
@@ -75,5 +62,21 @@ public class Order {
 
     public void setRecipientAddress(String recipientAddress) {
         this.recipientAddress = recipientAddress;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOderStatus(String oderStatus) {
+        this.orderStatus = oderStatus;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

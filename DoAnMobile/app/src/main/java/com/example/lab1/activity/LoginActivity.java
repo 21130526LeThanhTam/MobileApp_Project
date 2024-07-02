@@ -198,6 +198,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+
                                 if(!(user.isEmailVerified())){
                                     Log.d("verifyyyyy","tk chưa xác nhận");
                                     Toast.makeText(LoginActivity.this, "Tài khoản chưa được xác nhận", Toast.LENGTH_SHORT).show();
@@ -230,6 +231,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                         }
                                                     } else {
                                                         Toast.makeText(LoginActivity.this, "Tài khoản đã bị khóa", Toast.LENGTH_SHORT).show();
+
                                                     }
 
                                                 }
