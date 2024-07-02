@@ -10,12 +10,21 @@ public class User {
     private boolean active;
     private Cart cart;
 
-    public Cart getCart_id() {
+//    public Cart getCart_id() {
+//        return cart;
+//    }
+//
+//    public void setCart_id(Cart cart_id) {
+//        this.cart = cart_id;
+//    }
+
+
+    public Cart getCart() {
         return cart;
     }
 
-    public void setCart_id(Cart cart_id) {
-        this.cart = cart_id;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public String getName() {

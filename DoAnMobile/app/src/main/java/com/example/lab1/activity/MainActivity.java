@@ -100,19 +100,15 @@ public class MainActivity extends AppCompatActivity {
 
     ToolbarAdapter toolbarAdapter;
     List<com.example.lab1.model.Toolbar> listToolbar;
-
     NavigationView navigationView;
-
     DrawerLayout drawerLayout;
     CategoryAdapter categoryAdapter;
     List<Category> listCategory;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-   // ApiBanHang apiBanHang;
     List<NewProduct> newProductModelList;
     NewProductAdapter newProductAdapter;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
-    //=====================================
     ImageView avatar;
     TextView name;
     TextView email;
@@ -130,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-     //   apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         Anhxa();
         ActionBar();
         getToolbar();
@@ -139,10 +134,7 @@ public class MainActivity extends AppCompatActivity {
         setupSearch();
 
         showUserInformation();
-
-
         if (isConnect(this)) {
-            Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_LONG).show();
             ActionViewFlipper();
             getCategory();
         } else {
@@ -365,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view, int pos, boolean isLongClick) {
                         if (!isLongClick) {
                             int categoryId = listCategory.get(pos).getId(); // Lấy id kiểu int
-                            Toast.makeText(getApplicationContext(), String.valueOf(categoryId), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), String.valueOf(categoryId), Toast.LENGTH_SHORT).show();
                             Intent drinkIntent = new Intent(getApplicationContext(), CategoryActivity.class);
                             drinkIntent.putExtra("category_id", categoryId);
                             startActivity(drinkIntent);
@@ -514,7 +506,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 //
 //            // Hiển thị Toast thông báo
-            Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Giỏ hàng", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.miProfile) {
             View view = findViewById(R.id.miProfile);
@@ -525,16 +517,16 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     int itemId = menuItem.getItemId();
                     if (itemId == R.id.edit_profile) {
-                        Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(MainActivity.this, "Cập nhật thông tin", Toast.LENGTH_SHORT).show();
 
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main, profileFragment).commit();
                         return true;
                     } else if (itemId == R.id.change_pass) {
-                        Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(MainActivity.this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
                         return true;
                     } else if (itemId == R.id.logout) {
-                        Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
                         auth.signOut();
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);

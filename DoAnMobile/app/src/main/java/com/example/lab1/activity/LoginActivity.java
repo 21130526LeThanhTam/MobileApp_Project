@@ -99,13 +99,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }else if(id== R.id.txtdangki){
             Intent intent= new Intent(LoginActivity.this,RegisterActivity.class);
             startActivity(intent);
-            Toast.makeText(LoginActivity.this, "Đăng ký được nhấn", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this, "Đăng ký được nhấn", Toast.LENGTH_SHORT).show();
         }else if(id== R.id.txtresetpass){
-            Toast.makeText(LoginActivity.this, "Quên mật khẩu được nhấn", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(LoginActivity.this, "Quên mật khẩu được nhấn", Toast.LENGTH_SHORT).show();
             Intent intent1= new Intent(LoginActivity.this,ForgetPasswordActivity.class);
             startActivity(intent1);
         }else if(id== R.id.img_logo){
-            Toast.makeText(LoginActivity.this, "Quay về trang chủ", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(LoginActivity.this, "Quay về trang chủ", Toast.LENGTH_SHORT).show();
             Intent intent= new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }else if(id == R.id.google){
@@ -212,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }else {
                                     Log.d("verifyyyyy","tk đã được xác nhận");
 
-                                    Toast.makeText(LoginActivity.this, "user.getUid()" + user.getUid(), Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(LoginActivity.this, "user.getUid()" + user.getUid(), Toast.LENGTH_LONG).show();
                                     if (user != null) {
                                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User").child(user.getUid());
                                         databaseReference.addValueEventListener(new ValueEventListener() {
