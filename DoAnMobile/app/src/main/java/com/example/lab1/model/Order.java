@@ -1,6 +1,9 @@
 package com.example.lab1.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Order {
     private List<CartItem> products;
@@ -21,8 +24,19 @@ public class Order {
         this.userId = userId;
     }
 
+    public Order(List<CartItem> products, String recipientName, String recipientPhone, String recipientAddress, String oderStatus, String userId) {
+        this.products = products;
+        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());;
+        this.recipientName = recipientName;
+        this.recipientPhone = recipientPhone;
+        this.recipientAddress = recipientAddress;
+        this.orderStatus = oderStatus;
+        this.userId = userId;
+    }
+
     public Order() {
     }
+
 
     public List<CartItem> getProducts() {
         return products;
