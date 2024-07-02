@@ -76,6 +76,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.0.0")
     // Firebase Realtime Database
     implementation("com.google.firebase:firebase-database:20.0.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
     // login google
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-auth:21.0.3")
