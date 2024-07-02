@@ -1,22 +1,14 @@
 package com.example.lab1.adapter;
 
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab1.R;
 import com.example.lab1.model.Order;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -61,12 +53,12 @@ public class OrderAdapter extends BaseAdapter {
         TextView recipientNameTextView = convertView.findViewById(R.id.recipientName);
         TextView recipientPhoneTextView = convertView.findViewById(R.id.recipientPhone);
         TextView recipientAddressTextView = convertView.findViewById(R.id.recipientAddress);
-        TextView orderStatusTextView = convertView.findViewById(R.id.orderStatus);
-        Button orderCancel = convertView.findViewById(R.id.cancelOrderButton);
+//        TextView orderStatusTextView = convertView.findViewById(R.id.orderStatus);
+//        Button orderCancel = convertView.findViewById(R.id.cancelOrderButton);
 
         orderDateTextView.setText(order.getOrderDate());
         orderTotalTextView.setText(String.format("$%.2f", order.getTotalPrice()));
-        orderStatusTextView.setText(order.getOrderStatus());
+      //  orderStatusTextView.setText(order.getOrderStatus());
 //        if(order.getOrderStatus().equals("Đang xử lí")){
 //            orderCancel.setText("hủy");
 //            orderCancel.setOnClickListener(new View.OnClickListener() {

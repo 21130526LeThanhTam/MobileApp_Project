@@ -13,13 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lab1.R;
 import com.example.lab1.adapter.DrinkAdapter;
 import com.example.lab1.model.NewProduct;
-import com.example.lab1.retrofit.ApiBanHang;
-import com.example.lab1.retrofit.RetrofitClient;
-import com.example.lab1.utils.Utils;
-
-import com.example.lab1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +31,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class CategoryActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
-    ApiBanHang apiBanHang;
+   // ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     int page = 1;
     int category;
@@ -48,7 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_category);
-        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+       // apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         // Retrieve the category ID from the intent
         category = getIntent().getIntExtra("category_id", 1);  // Default to category 1 if not provided
 

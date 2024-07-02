@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.lab1.R;
-import com.example.lab1.dao.UserDao;
+//import com.example.lab1.dao.UserDao;
 import com.example.lab1.model.Cart;
 import com.example.lab1.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView txtdangki, txtresetpass;
     EditText email, pass;
     AppCompatButton btndangnhap,google;
-    UserDao userDao;
+    //UserDao userDao;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     ImageView logo;
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pass = findViewById(R.id.pass);
         btndangnhap = findViewById(R.id.btndangnhap);
         google = findViewById(R.id.google);
-        userDao= new UserDao(this);
+       // userDao= new UserDao(this);
         btndangnhap.setOnClickListener(this);
         txtdangki.setOnClickListener(this);
         txtresetpass.setOnClickListener(this);

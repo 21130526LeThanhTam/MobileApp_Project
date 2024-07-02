@@ -49,7 +49,7 @@ public class admin_qldonhang_fm extends Fragment {
         List<Order> orderList=new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Order");
         progressBar.setVisibility(View.VISIBLE);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){

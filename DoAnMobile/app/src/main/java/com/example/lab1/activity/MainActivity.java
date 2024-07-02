@@ -43,17 +43,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.Interface.CategoryClickListener;
+import com.example.lab1.R;
 import com.example.lab1.adapter.CategoryAdapter;
 import com.example.lab1.adapter.NewProductAdapter;
+import com.example.lab1.adapter.SearchAdapter;
 import com.example.lab1.adapter.ToolbarAdapter;
 import com.example.lab1.model.Category;
 import com.example.lab1.model.NewProduct;
-import com.example.lab1.retrofit.ApiBanHang;
-import com.example.lab1.retrofit.RetrofitClient;
-import com.example.lab1.utils.Utils;
-import com.example.lab1.adapter.SearchAdapter;
 import com.example.lab1.model.User;
-import com.example.lab1.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     CategoryAdapter categoryAdapter;
     List<Category> listCategory;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-    ApiBanHang apiBanHang;
+   // ApiBanHang apiBanHang;
     List<NewProduct> newProductModelList;
     NewProductAdapter newProductAdapter;
     FirebaseUser firebaseUser;
@@ -133,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+     //   apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         Anhxa();
         ActionBar();
         getToolbar();
@@ -260,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(trangchu);
                         break;
                     case 1:
-                        Intent setting = new Intent(getApplicationContext(), SettingActivity.class);
+                        Intent setting = new Intent(getApplicationContext(), InformationActivity.class);
                         setting.putExtra("category_id", 1);
                         startActivity(setting);
                         break;
@@ -268,10 +265,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent contact = new Intent(getApplicationContext(), ContactActivity.class);
                         startActivity(contact);
                         break;
-                    case 3:
-                        Intent information = new Intent(getApplicationContext(), InformationActivity.class);
-                        startActivity(information);
-                        break;
+//                    case 3:
+//                        Intent information = new Intent(getApplicationContext(), InformationActivity.class);
+//                        startActivity(information);
+//                        break;
 
                 }
 

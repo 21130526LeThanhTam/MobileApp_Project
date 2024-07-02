@@ -60,7 +60,7 @@ ImageView btn_back;
     public List<Information> getInformation(){
         List<Information> result=new ArrayList<>();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("About");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){

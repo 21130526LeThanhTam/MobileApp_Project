@@ -135,7 +135,7 @@ public class OrderAdapterRecycleView extends RecyclerView.Adapter<OrderAdapterRe
         databaseReference.child(stt);
     switch(action){
         case "remove":
-            if(order.getOrderStatus().equals("Đang xử lí")){
+            if(order.getOrderStatus().equals("Đang xử lý")){
                 order.setOrderStatus("Đã hủy");
                 databaseReference.child(stt).child("orderStatus").setValue("Đã hủy");
                 notifyItemChanged(position);
@@ -145,22 +145,23 @@ public class OrderAdapterRecycleView extends RecyclerView.Adapter<OrderAdapterRe
                 Toast.makeText(context,"Không thể hủy đơn hàng "+order.getOrderStatus(),Toast.LENGTH_SHORT).show();
                 break;
             }
-
         case "check":
            switch (order.getOrderStatus()){
-               case "Đang xử lí":
+               case "Đang xử lý":
                    order.setOrderStatus("Đang giao hàng");
                    databaseReference.child(stt).child("orderStatus").setValue("Đang giao hàng");
                    notifyItemChanged(position);
-
                    Toast.makeText(context,"Successful",Toast.LENGTH_SHORT).show();
                    break;
                default:
                    Toast.makeText(context,"Thao tác không được thực hiện ",Toast.LENGTH_SHORT).show();
                    break;
            }
+        default:
+            break;
 
     }
+
 
    };
 
