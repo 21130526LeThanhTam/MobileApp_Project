@@ -8,14 +8,14 @@ public class User {
     private String phone;
     private int role;
     private boolean active;
-    private Cart cart_id;
+    private Cart cart;
 
     public Cart getCart_id() {
-        return cart_id;
+        return cart;
     }
 
     public void setCart_id(Cart cart_id) {
-        this.cart_id = cart_id;
+        this.cart = cart_id;
     }
 
     public String getName() {
@@ -66,20 +66,20 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String id, String name, String email, String phone, int role, boolean active, Cart cart_id) {
+    public User(String id, String name, String email, String phone, int role, boolean active, Cart cart) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.role = role;
         this.active = active;
-        this.cart_id = cart_id;
+        this.cart = cart;
     }
 
 
     public User(){}
 
-    public User(String id, String name, String email, String password, String phone, int role, boolean active, Cart cart_id) {
+    public User(String id, String name, String email, String password, String phone, int role, boolean active, Cart cart) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -87,7 +87,7 @@ public class User {
         this.phone = phone;
         this.role = role;
         this.active = active;
-        this.cart_id = cart_id;
+        this.cart = cart;
     }
 
     public boolean isActive() {
@@ -108,7 +108,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", role=" + role +
                 ", active=" + active +
-                ", cart_id=" + cart_id +
+                ", cart=" + cart +
                 '}';
     }
 }

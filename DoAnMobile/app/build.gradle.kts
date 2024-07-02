@@ -5,7 +5,15 @@ plugins {
 }
 
 android {
-//    signingConfigs {
+signingConfigs {
+    create("thu") {
+        storeFile = file("D:\\a\\keystore.jks")
+        storePassword = "123456"
+        keyAlias = "key0"
+        keyPassword = "123456"
+    }
+}
+    //    signingConfigs {
 //        create("debug1") {
 //            storeFile = file("D:\\5.TÀI LIỆU\\keystore_test.jks")
 //            storePassword = "123456"
@@ -31,7 +39,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-//        getByName("debug") {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("thu")
+        }
+        //        getByName("debug") {
 //            signingConfig = signingConfigs.getByName("debug1")
 //        }
     }
