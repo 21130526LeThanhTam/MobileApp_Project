@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -70,20 +71,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             email.requestFocus();
         } else if(TextUtils.isEmpty(str_pass)){
             Toast.makeText(RegisterActivity.this, "Nhập mật khẩu", Toast.LENGTH_SHORT).show();
-            email.setError("Mật khẩu bị để trống");
-            email.requestFocus();
+            pass.setError("Mật khẩu bị để trống");
+            pass.requestFocus();
         } else if(TextUtils.isEmpty(str_repass)){
             Toast.makeText(RegisterActivity.this, "Nhập lại mật khẩu", Toast.LENGTH_SHORT).show();
-            email.setError("Mật khẩu nhập lại bị để trống");
-            email.requestFocus();
+            repass.setError("Mật khẩu nhập lại bị để trống");
+            repass.requestFocus();
         } else if(TextUtils.isEmpty(str_mobile)){
             Toast.makeText(RegisterActivity.this, "Nhập số điện thoại", Toast.LENGTH_SHORT).show();
-            email.setError("Số điện thoại bị để trống");
-            email.requestFocus();
+            mobile.setError("Số điện thoại bị để trống");
+            mobile.requestFocus();
         } else if(TextUtils.isEmpty(str_username)){
             Toast.makeText(RegisterActivity.this, "Nhập tên hệ thống", Toast.LENGTH_SHORT).show();
-            email.setError("Tên hệ thống bị để trống");
-            email.requestFocus();
+            username.setError("Tên hệ thống bị để trống");
+            username.requestFocus();
         } else if(str_pass.equals(str_repass)){
             auth= FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(str_email,str_pass).addOnCompleteListener(RegisterActivity.this,
@@ -102,6 +103,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         Toast.makeText(RegisterActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                                auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Log.d("TaggggggSend","send success");
+                                        }else{
+                                            Log.d("TaggggggSend","send Faillllllllll");
+                                        }
+                                    }
+                                });
+
+
 
                                 Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                 // chuyển sang trang chính.

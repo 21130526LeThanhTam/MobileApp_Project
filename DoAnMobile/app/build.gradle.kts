@@ -56,7 +56,7 @@ dependencies {
 
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-auth")
+
 
     // gilder
     implementation("com.github.bumptech.glide:glide:4.16.0")
@@ -76,4 +76,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.0.0")
     // Firebase Realtime Database
     implementation("com.google.firebase:firebase-database:20.0.0")
+    // login google
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-auth:21.0.3")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 }
