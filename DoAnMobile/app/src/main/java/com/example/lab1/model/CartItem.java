@@ -2,17 +2,20 @@ package com.example.lab1.model;
 
 import java.io.Serializable;
 
-public class CartItem implements Serializable {
+public class CartItem {
+    private String cartItemId;
     private String productId;
     private String productName;
     private int quantity;
-    private String price;
+    private double price;
     private String imageUrl;
 
     public CartItem() {
+        // Constructor mặc định cho Firebase
     }
 
-    public CartItem(String productId, String productName, int quantity, String price, String imageUrl) {
+    public CartItem(String cartItemId, String productId, String productName, int quantity, double price, String imageUrl) {
+        this.cartItemId = cartItemId;
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
@@ -20,9 +23,12 @@ public class CartItem implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public CartItem(String productId, int quantity) {
-        this.productId = productId;
-        this.quantity = quantity;
+    public String getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(String cartItemId) {
+        this.cartItemId = cartItemId;
     }
 
     public String getProductId() {
@@ -49,11 +55,11 @@ public class CartItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -63,15 +69,6 @@ public class CartItem implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return
-                "[ mã sp: " + productId +
-
-                ", số lượng: " + quantity +" ]"
-               ;
     }
 }
 

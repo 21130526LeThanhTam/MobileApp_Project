@@ -1,39 +1,59 @@
 package com.example.lab1.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Order {
     private List<CartItem> products;
+    private double totalPrice;
     private String orderDate;
     private String recipientName;
     private String recipientPhone;
     private String recipientAddress;
-    private String orderStatus;
     private String userId;
+    private String orderStatus;
 
-    public Order(List<CartItem> products, String orderDate, String recipientName, String recipientPhone, String recipientAddress, String oderStatus, String userId) {
+    public Order(List<CartItem> products, double totalPrice) {
         this.products = products;
-        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
+
+    public Order() {
+    }
+
+    public Order(List<CartItem> products, double totalPrice, String recipientName, String recipientPhone, String recipientAddress, String userId, String orderStatus) {
+        this.products = products;
+        this.totalPrice = totalPrice;
+        this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         this.recipientName = recipientName;
         this.recipientPhone = recipientPhone;
         this.recipientAddress = recipientAddress;
-        this.orderStatus = oderStatus;
         this.userId = userId;
-    }
-
-    public Order() {
+        this.orderStatus = orderStatus;
     }
 
     public List<CartItem> getProducts() {
         return products;
     }
 
-    public void setProducts(List<CartItem> products) {
-        this.products = products;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     public String getOrderDate() {
         return orderDate;
+    }
+
+    public void setProducts(List<CartItem> products) {
+        this.products = products;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void setOrderDate(String orderDate) {
@@ -68,8 +88,8 @@ public class Order {
         return orderStatus;
     }
 
-    public void setOderStatus(String oderStatus) {
-        this.orderStatus = oderStatus;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getUserId() {

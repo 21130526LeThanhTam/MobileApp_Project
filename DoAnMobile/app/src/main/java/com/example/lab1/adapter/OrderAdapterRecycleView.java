@@ -136,7 +136,7 @@ public class OrderAdapterRecycleView extends RecyclerView.Adapter<OrderAdapterRe
     switch(action){
         case "remove":
             if(order.getOrderStatus().equals("Đang xử lí")){
-                order.setOderStatus("Đã hủy");
+                order.setOrderStatus("Đã hủy");
                 databaseReference.child(stt).child("orderStatus").setValue("Đã hủy");
                 notifyItemChanged(position);
                 Toast.makeText(context, "Đã hủy đơn hàng", Toast.LENGTH_SHORT).show();
@@ -149,7 +149,7 @@ public class OrderAdapterRecycleView extends RecyclerView.Adapter<OrderAdapterRe
         case "check":
            switch (order.getOrderStatus()){
                case "Đang xử lí":
-                   order.setOderStatus("Đang giao hàng");
+                   order.setOrderStatus("Đang giao hàng");
                    databaseReference.child(stt).child("orderStatus").setValue("Đang giao hàng");
                    notifyItemChanged(position);
 
