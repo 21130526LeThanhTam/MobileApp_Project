@@ -24,13 +24,17 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.lab1.R;
+import com.example.lab1.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
     private View mView;
@@ -41,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private Button btnBack;
     Uri mUri;
     MainActivity mMainActivity;
+    User user = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +99,6 @@ public class ProfileFragment extends Fragment {
                 .setPhotoUri(mUri)
                 .build();
 
-
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -116,6 +120,15 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onClickUpdatePhone() {
+        String strPhone = editphone.getText().toString().trim();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
+                .child(user.getUid());
+        databaseReference.child("phone").setValue(strPhone);
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        if (user == null) {
 //            return;
@@ -135,8 +148,7 @@ public class ProfileFragment extends Fragment {
 //                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
 //                                    .child(user.getUid());
 //                            databaseReference.child("phone").setValue(editphone).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+//                                @Override/-strong/-heart:>:o:-((:-h//                                public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
 //                                    Toast.makeText(getActivity(), "update thành công", Toast.LENGTH_SHORT).show();
 //                                    mMainActivity.showUserInformation();
 //                                }
@@ -175,9 +187,27 @@ public class ProfileFragment extends Fragment {
             return;
 
         }
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User")
+                .child(user.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
+
+
+                User    user = snapshot.getValue(User.class);
+
+
+                editphone.setText(user.getPhone());
+            }
+
+            @Override
+            public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+
+            }
+        });
         editFullName.setText(user.getDisplayName());
         editsdt.setText(user.getEmail());
-        editphone.setText(user.getPhoneNumber());
+
         Glide.with(getActivity()).load(user.getPhotoUrl()).error(R.drawable.user).into(imgAvatar);
     }
 
