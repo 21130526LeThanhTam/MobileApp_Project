@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Order {
+    private String orderId;
     private List<CartItem> products;
     private double totalPrice;
     private String orderDate;
@@ -25,7 +26,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(List<CartItem> products, double totalPrice, String recipientName, String recipientPhone, String recipientAddress, String userId, String orderStatus) {
+    public Order(String orderId, List<CartItem> products, double totalPrice, String recipientName, String recipientPhone, String recipientAddress, String userId, String orderStatus) {
+        this.orderId = orderId;
         this.products = products;
         this.totalPrice = totalPrice;
         this.orderDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -100,4 +102,11 @@ public class Order {
         this.userId = userId;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 }

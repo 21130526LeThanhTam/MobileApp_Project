@@ -36,9 +36,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private OrderAdapter orderAdapter;
     private List<Order> orderList;
     private DatabaseReference ordersRef;
-    List<String> k;
 
-    Button cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         orderListView = findViewById(R.id.orderListView);
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(this, orderList,k);
+        orderAdapter = new OrderAdapter(this, orderList);
         orderListView.setAdapter(orderAdapter);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -64,7 +62,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Order order = snapshot.getValue(Order.class);
                         orderList.add(order);
-//                        k.add(snapshot.getKey());
                     }
                     orderAdapter.notifyDataSetChanged();
                 }
