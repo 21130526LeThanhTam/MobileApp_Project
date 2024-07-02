@@ -20,6 +20,11 @@ public class CartItem implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public CartItem(String productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public String getProductId() {
         return productId;
     }
@@ -58,6 +63,15 @@ public class CartItem implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "[ mã sp: " + productId +
+
+                ", số lượng: " + quantity +" ]"
+               ;
     }
 }
 

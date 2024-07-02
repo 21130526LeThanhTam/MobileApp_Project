@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -12,16 +13,16 @@
        android:background="@color/toolBarColor"
        android:orientation="horizontal"
 
-       >
+       tools:ignore="UseSwitchCompatOrMaterialXml">
 
       <TextView
           android:id="@+id/nameUser"
           android:layout_width="0dp"
           android:gravity="center"
-
+          android:layout_gravity="center"
           android:layout_height="wrap_content"
           android:text="Tên"
-          android:layout_weight="1"
+          android:layout_weight="0.7"
           />
       <View
           android:layout_width="1dp"
@@ -31,7 +32,7 @@
           android:id="@+id/idEmail"
           android:layout_width="0dp"
           android:gravity="center"
-
+          android:layout_gravity="center"
           android:layout_height="wrap_content"
           android:text="email"
           android:layout_weight="1"
@@ -45,20 +46,22 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:text="sdt"
+          android:layout_gravity="center"
           android:gravity="center"
-          android:layout_weight="1"
+          android:layout_weight="0.75"
           />
       <View
           android:layout_width="1dp"
           android:layout_height="match_parent"
           android:background="@color/red" />
-     <androidx.appcompat.widget.SwitchCompat
+     <Switch
          android:gravity="center"
          android:layout_width="50dp"
          android:layout_height="wrap_content"
-         android:id="@+id/activeUser" />
-<!--         app:thumbTint="#0C4DDA"-->
-<!--         app:trackTint="@color/white"-->
+         android:id="@+id/activeUser"
+         android:layout_gravity="center"
+         app:thumbTint="#0C4DDA"
+         app:trackTint="@color/white"/>
 
 
 

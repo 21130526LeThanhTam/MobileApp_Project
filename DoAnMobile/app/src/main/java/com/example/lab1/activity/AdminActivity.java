@@ -23,6 +23,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     ImageView menuAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         menuAdmin=findViewById(R.id.menuAdmin);
@@ -65,17 +66,16 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 switch (item.getItemId()){
                     case R.id.tv_homei:
                 fragment = new admin_trangchu_fm();
-                transaction.add(R.id.frame_admin,fragment);
+                transaction.replace(R.id.frame_admin,fragment);
                         transaction.commit();
                 return true;
                 case R.id.tv_qldonhang:
                 fragment = new admin_qldonhang_fm();
-                transaction.add(R.id.frame_admin,fragment);
+                transaction.replace(R.id.frame_admin,fragment);
                     transaction.commit();
                     return true;
                     case R.id.tv_qluser:
                         fragment = new admin_qluser_fm();
-
                         transaction.replace(R.id.frame_admin,fragment);
                         transaction.commit();
                         return true;
