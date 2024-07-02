@@ -49,84 +49,6 @@ public class CartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_cart);
-//
-//        cartListView = findViewById(R.id.cartView);
-//        totalPriceTextView = findViewById(R.id.totalTxt);
-//        totalFeeTextView = findViewById(R.id.totalFeeTxt);
-//        checkOutBtn = findViewById(R.id.checkOutBtn);
-//        viewOrderHistoryBtn = findViewById(R.id.viewOrderHistoryBtn);
-//        recipientNameEditText = findViewById(R.id.recipientName);
-//        recipientPhoneEditText = findViewById(R.id.recipientPhone);
-//        recipientAddressEditText = findViewById(R.id.recipientAddress);
-//
-////        loadCartItems();
-//
-//        cartItemList = new ArrayList<>();
-//        adapter = new CartAdapter(this, R.layout.cart_item, cartItemList);
-//        cartListView.setAdapter(adapter);
-//
-//        // Khởi tạo Firebase
-//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//
-//        if (currentUser != null) {
-//            String userId = currentUser.getUid();
-//            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//            cartRef = firebaseDatabase.getReference("User").child(userId).child("cart");
-//
-//            // Lấy dữ liệu giỏ hàng từ Firebase
-//            cartRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    cartItemList.clear();
-//                    Cart cart = dataSnapshot.getValue(Cart.class);
-//                    if (cart != null && cart.getCartItems() != null) {
-//                        cartItemList.addAll(cart.getCartItems());
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                    calculateTotal();
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    Toast.makeText(CartActivity.this, "Failed to load cart: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-
-
-//
-//        }
-//
-//        ImageView backButton = findViewById(R.id.imageView);
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(CartActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//        checkOutBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                placeOrder();
-//            }
-//        });
-//
-//        viewOrderHistoryBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(CartActivity.this, OrderHistoryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-//        updateTotalPrice();
-//        updateTotalQuantity();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
@@ -138,6 +60,7 @@ public class CartActivity extends AppCompatActivity {
         recipientNameEditText = findViewById(R.id.recipientName);
         recipientPhoneEditText = findViewById(R.id.recipientPhone);
         recipientAddressEditText = findViewById(R.id.recipientAddress);
+
 
         cartItemList = new ArrayList<>();
         adapter = new CartAdapter(this, R.layout.cart_item, cartItemList);
@@ -189,7 +112,9 @@ public class CartActivity extends AppCompatActivity {
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkout();
+                if (!isFinishing()) {
+                    checkout();
+                }
             }
         });
         viewOrderHistoryBtn.setOnClickListener(new View.OnClickListener() {
