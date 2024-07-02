@@ -1,113 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lab1.activity.MainActivity">
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerlayout"
+    android:orientation="vertical"
+    tools:context="com.example.lab1.activity.ContactActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toobarmanhinhchinh"
+        android:background="#ffba00"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_back" />
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/logo"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Liên Hệ"
+                android:textSize="40dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-black"
+                android:textColor="#ffffff"
+                />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         android:orientation="vertical"
+        android:gravity="center"
+        >
         <LinearLayout
-            android:orientation="vertical"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="19dp"
-                android:background="#ffba00" />
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toobarmanhinhchinh"
-                android:background="#ffba00"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end">
-                    <ImageView
-                        android:id="@+id/logo"
-                        android:layout_width="70dp"
-                        android:layout_height="100dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/logo"/>
-                    <EditText
-                        android:id="@+id/search_box"
-                        android:layout_width="300dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/logo"
-                        android:drawableRight="@drawable/baseline_find_replace_24"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/edittext_rounded_bg"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="7dp"
-                        /> <!-- Hoặc sử dụng android:paddingRight="10dp" -->
-                </RelativeLayout>
-            </androidx.appcompat.widget.Toolbar>
-            <ViewFlipper
-                android:id="@+id/viewLipper"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-            </ViewFlipper>
-
-        </LinearLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationview"
-            android:layout_gravity="start"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <!-- LinearLayout đầu tiên -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    android:gravity="bottom"
-                    android:background="@drawable/background_buttton">
-                    <!-- Nội dung bên trong -->
-                    <ImageView
-                        android:id="@+id/img_avatar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/user"/>
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Le Thanh Tam"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/white" />
-                    <TextView
-                        android:id="@+id/tv_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="abc@gmail.com"
-                        android:textSize="14sp"
-                        android:textColor="@color/white" />
-                </LinearLayout>
+                    android:text="Thông tin:"
+                    android:textSize="20dp"
+                    android:gravity="left"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_weight="0.5"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" Đồ án môn Lập trình di động"
+                    android:textSize="18dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    />
 
-                <!-- ListView -->
-                <ListView
-                    android:id="@+id/listviewMain"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ:"
+                    android:textSize="20dp"
+                    android:gravity="left"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_weight="0.5"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" trường Đại học Nông Lâm TPHCM"
+                    android:textSize="18dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại:"
+                    android:textSize="20dp"
+                    android:gravity="left"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_weight="0.5"
+
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" 0894744488"
+                    android:textSize="18dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textSize="20dp"
+                    android:gravity="left"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_weight="0.5"
+
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" myteam@hcmuaf.edu.vn"
+                    android:textSize="18dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    />
+
             </LinearLayout>
 
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
+        </LinearLayout>
+        <fragment
+            android:layout_marginTop="30dp"
+            android:id="@+id/my_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            />
+    </LinearLayout>
+
+</LinearLayout>

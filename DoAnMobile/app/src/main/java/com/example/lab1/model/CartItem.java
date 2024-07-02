@@ -70,5 +70,14 @@ public class CartItem {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return
+                "[ mã sp: " + productId +
+
+                ", số lượng: " + quantity +" ]"
+               ;
+    }
 }
 

@@ -34,6 +34,8 @@
             android:layout_height="wrap_content"
             android:text="tenkh"
             android:textColor="#2057E5"
+            android:layout_gravity="center"
+
             android:layout_weight="1"
             />
         <View
@@ -59,6 +61,7 @@
             android:layout_width="0dp"
             android:textColor="#2057E5"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="ngaydat"
 

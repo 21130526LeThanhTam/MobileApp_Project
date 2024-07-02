@@ -60,7 +60,6 @@ public class admin_qluser_fm extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot :snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
-                    Toast.makeText(getContext(), "a"+user.isActive(), Toast.LENGTH_SHORT).show();
                     result.add(user);
                 }
 //                userAdapter.notifyDataSetChanged();

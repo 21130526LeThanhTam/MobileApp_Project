@@ -52,14 +52,10 @@ public class admin_qldonhang_fm extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     Order order=dataSnapshot.getValue(Order.class);
                     orderList.add(order);
-
                     stt.add(dataSnapshot.getKey());
-
-
                 }
 
                 progressBar.setVisibility(View.GONE);

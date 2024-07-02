@@ -45,4 +45,5 @@
     </string>
     <string name="gi_25_000">Giá: 25.000Đ</string>
     <string name="th_m_v_o_gi_h_ng">Thêm vào giỏ hàng</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

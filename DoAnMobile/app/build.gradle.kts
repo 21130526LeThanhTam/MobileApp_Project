@@ -1,9 +1,18 @@
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 }
 
 android {
+    signingConfigs {
+        create("debug1") {
+            storeFile = file("D:\\5.TÀI LIỆU\\keystore_test.jks")
+            storePassword = "123456"
+            keyAlias = "test"
+            keyPassword = "123456"
+        }
+    }
     namespace = "com.example.lab1"
     compileSdk = 34
 
@@ -21,6 +30,9 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug1")
         }
     }
     compileOptions {
@@ -42,6 +54,8 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -76,4 +90,5 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.0.0")
     // Firebase Realtime Database
     implementation("com.google.firebase:firebase-database:20.0.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
 }
