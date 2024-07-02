@@ -111,5 +111,19 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/line6"
         tools:layout_editor_absoluteX="0dp" />
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/google"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="25sp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/background_button_google"
+        android:text="Sign In With Google"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/textotp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
