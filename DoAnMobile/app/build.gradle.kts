@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        create("debug1") {
-            storeFile = file("D:\\5.TÀI LIỆU\\keystore_test.jks")
-            storePassword = "123456"
-            keyAlias = "test"
-            keyPassword = "123456"
-        }
-    }
+//    signingConfigs {
+//        create("debug1") {
+//            storeFile = file("D:\\5.TÀI LIỆU\\keystore_test.jks")
+//            storePassword = "123456"
+//            keyAlias = "test"
+//            keyPassword = "123456"
+//        }
+//    }
     namespace = "com.example.lab1"
     compileSdk = 34
 
@@ -31,9 +31,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        getByName("debug") {
-            signingConfig = signingConfigs.getByName("debug1")
-        }
+//        getByName("debug") {
+//            signingConfig = signingConfigs.getByName("debug1")
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
