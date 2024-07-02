@@ -21,13 +21,11 @@ import java.util.List;
 
 public class CartAdapter extends BaseAdapter {
     private Context context;
-    private int layout;
     private List<CartItem> cartItems;
     private DatabaseReference cartRef;
 
-    public CartAdapter(Context context, int layout, List<CartItem> cartItems) {
+    public CartAdapter(Context context, List<CartItem> cartItems) {
         this.context = context;
-        this.layout = layout;
         this.cartItems = cartItems;
     }
 
@@ -49,8 +47,9 @@ public class CartAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(layout, null);
+//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            convertView = inflater.inflate(layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.cart_item, parent, false);
         }
 
         TextView productNameTextView = convertView.findViewById(R.id.product_name);
@@ -79,14 +78,12 @@ public class CartAdapter extends BaseAdapter {
                 if (newQuantity > 0) {
                     cartItem.setQuantity(newQuantity);
                     productQuantityTextView.setText(String.valueOf(newQuantity));
-
                     // Cập nhật số lượng sản phẩm trực tiếp lên Firebase
-
                     cartRef.child(cartItemId).child("quantity").setValue(newQuantity);
                 }else if (newQuantity == 0){
                     cartItems.remove(position);
                     cartRef.child(cartItemId).removeValue();
-                    notifyDataSetChanged();
+
                 }else{
                     Toast.makeText(context, "Số lượng sản phẩm không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
                 }
@@ -98,7 +95,6 @@ public class CartAdapter extends BaseAdapter {
                 int newQuantity = cartItem.getQuantity() + 1;
                 cartItem.setQuantity(newQuantity);
                 productQuantityTextView.setText(String.valueOf(newQuantity));
-
                 // Cập nhật số lượng sản phẩm trực tiếp lên Firebase
                 cartRef.child(cartItemId).child("quantity").setValue(newQuantity);
             }

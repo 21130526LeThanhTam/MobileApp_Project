@@ -63,7 +63,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         cartItemList = new ArrayList<>();
-        adapter = new CartAdapter(this, R.layout.cart_item, cartItemList);
+        adapter = new CartAdapter(this, cartItemList);
         cartListView.setAdapter(adapter);
 
         // Khởi tạo Firebase
@@ -164,12 +164,11 @@ public class CartActivity extends AppCompatActivity {
         String orderId = ordersRef.push().getKey();
         double price = calculateTotal();
 
-        Order order = new Order( cartItemList, price, recipientName, recipientPhone, recipientAddress, userId, "Đang xử lý");
+        Order order = new Order(orderId, cartItemList, price, recipientName, recipientPhone, recipientAddress, userId, "Đang xử lý");
         ordersRef.child(orderId).setValue(order)
                 .addOnSuccessListener(aVoid -> {
                     cartRef.removeValue(); // Clear the cart
                     Toast.makeText(CartActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
-                    finish(); // Close the cart activity
                 })
                 .addOnFailureListener(e -> Toast.makeText(CartActivity.this, "Failed to place order: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
