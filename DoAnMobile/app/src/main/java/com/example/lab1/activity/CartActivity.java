@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -51,6 +52,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        EdgeToEdge.enable(this);
 
         cartListView = findViewById(R.id.cartView);
         totalPriceTextView = findViewById(R.id.totalTxt);
@@ -114,6 +116,7 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!isFinishing()) {
                     checkout();
+                    restartCartActivity();
                 }
             }
         });
@@ -134,7 +137,15 @@ public class CartActivity extends AppCompatActivity {
             totalQuantity += item.getQuantity();
         }
         totalFeeTextView.setText(String.format("%d", totalQuantity));
+
+
     }
+    private void restartCartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
 
     private double calculateTotal() {
         double total = 0;
@@ -172,5 +183,6 @@ public class CartActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Toast.makeText(CartActivity.this, "Failed to place order: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 
 }

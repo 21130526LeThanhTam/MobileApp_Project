@@ -60,7 +60,10 @@ public class admin_qluser_fm extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot :snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
-                    result.add(user);
+                    if(user.getRole()==1){
+                        result.add(user);
+                    }
+
                 }
 //                userAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);

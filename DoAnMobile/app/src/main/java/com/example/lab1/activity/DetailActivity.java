@@ -1,7 +1,9 @@
 package com.example.lab1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,6 +46,8 @@ public class DetailActivity extends AppCompatActivity {
     private DatabaseReference cartRef;
     private CartItem cartItem;
     private List<CartItem> cartItemList;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +57,8 @@ public class DetailActivity extends AppCompatActivity {
         initView();
 
         // Khởi tạo Firebase Database
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+         firebaseAuth = FirebaseAuth.getInstance();
+         currentUser = firebaseAuth.getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
@@ -97,6 +101,7 @@ public class DetailActivity extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 addToCart();
             }
         });
@@ -148,6 +153,10 @@ public class DetailActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(DetailActivity.this, "Đã cập nhật giỏ hàng", Toast.LENGTH_SHORT).show();
+                                Intent aa= new Intent(DetailActivity.this,CartActivity.class);
+                                startActivity(aa );
+                                Log.d("TaggggggcART","SUCCESSSS");
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
