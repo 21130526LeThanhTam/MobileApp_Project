@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.lab1.activity.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerlayout"
@@ -46,9 +46,17 @@
                         android:background="@drawable/edittext_rounded_bg"
                         android:paddingLeft="10dp"
                         android:paddingRight="7dp"
-                        /> <!-- Hoặc sử dụng android:paddingRight="10dp" -->
+                        android:hint="Tìm kiếm món" />
+
+                  <!-- Hoặc sử dụng android:paddingRight="10dp" -->
+
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_box" />
             <ViewFlipper
                 android:id="@+id/viewLipper"
                 android:layout_width="match_parent"
@@ -88,10 +96,51 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ListView
-                android:id="@+id/listviewMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- LinearLayout đầu tiên -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="bottom"
+                    android:background="@drawable/background_buttton">
+                    <!-- Nội dung bên trong -->
+                    <ImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/user"/>
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Le Thanh Tam"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="abc@gmail.com"
+                        android:textSize="14sp"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <!-- ListView -->
+                <ListView
+                    android:id="@+id/listviewMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 

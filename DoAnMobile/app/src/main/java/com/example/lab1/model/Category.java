@@ -1,9 +1,9 @@
 package com.example.lab1.model;
 
 public class Category {
-    private int id;
-    private String name_category;
-    private int image_category;
+    int id;
+    String name;
+    String image;
 
     public int getId() {
         return id;
@@ -13,29 +13,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getName_category() {
-        return name_category;
+    public String getName() {
+        return name;
     }
 
-    public void setName_category(String name_category) {
-        this.name_category = name_category;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getImage_category() {
-        return image_category;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage_category(int image_category) {
-        this.image_category = image_category;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-    public Category() {
-    }
-
-    public Category(int id, String name_category, int image_category) {
-        this.id = id;
-        this.name_category = name_category;
-        this.image_category = image_category;
-    }
-
 }

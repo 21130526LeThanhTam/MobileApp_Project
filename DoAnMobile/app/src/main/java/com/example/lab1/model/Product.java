@@ -1,7 +1,5 @@
 package com.example.lab1.model;
 
-import com.example.lab1.R;
-
 import java.text.DecimalFormat;
 
 public class Product {
@@ -15,6 +13,9 @@ public class Product {
         this.name_product = name_product;
         this.image_product = image_product;
         this.price = price;
+    }
+
+    public Product() {
     }
 
     public int getId() {
